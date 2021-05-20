@@ -1,0 +1,38 @@
+{
+  "name": "aerial-grid-mapping",
+  "version": "1.0.0",
+  "description": "A side project using the Google Maps API and geometry to do grid mapping on satellite images of a location.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx webpack",
+    "dev": "npx webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryceStPierre/aerial-grid-mapping.git"
+  },
+  "keywords": [],
+  "author": "Bryce St. Pierre",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BryceStPierre/aerial-grid-mapping/issues"
+  },
+  "homepage": "https://github.com/BryceStPierre/aerial-grid-mapping#readme",
+  "dependencies": {
+    "d3": "^6.7.0",
+    "jquery": "^3.6.0",
+    "normalize.css": "^8.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.5",
+    "dotenv": "^9.0.2",
+    "html-webpack-plugin": "^5.3.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}
