@@ -1,0 +1,19 @@
+section {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+#stepOne {
+  background-color: cornflowerblue;
+}
+#stepTwo {
+  background-color: palevioletred
+}
+#stepThree {
+  background-color: yellowgreen;
+}

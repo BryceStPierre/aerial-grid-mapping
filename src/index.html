@@ -5,26 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
   </head>
   <body>
     <header>
       <h1><%= htmlWebpackPlugin.options.title %></h1>
     </header>
 
-    <!-- Step 1: Find a location. -->
-    <section id="stepOne">
-      <div id="map"></div>
-    </section>
+    <main>
+      <!-- Step 1: Find a location. -->
+      <section id="stepOne" class="active">
+        <div id="map"></div>
+      </section>
 
-    <!-- Step 2: Select a region. -->
-    <section id="stepTwo" style="display: none"></section>
+      <!-- Step 2: Select a region. -->
+      <section id="stepTwo">
+      
+      </section>
 
-    <!-- Step 3: Select units in the grid map. -->
-    <section id="stepThree" style="display: none"></section>
+      <!-- Step 3: Select units in the grid map. -->
+      <section id="stepThree">
+      
+      </section>
+    </main>
+
+    <nav>
+      <div>
+        <button id="back" disabled>Back</button>
+        <h2 id="stepText">Find a location.</h2>
+        <button id="next">Next</button>
+      </div>
+    </nav>
 
     <footer>
       <p>
-        Developed by Bryce St. Pierre in 2017.<br>View the code
+        Developed by Bryce St. Pierre in 2017.<br>View the code 
         <a href="https://github.com/BryceStPierre/aerial-grid-mapping" target="_blank">on GitHub</a>.
       </p>
     </footer>

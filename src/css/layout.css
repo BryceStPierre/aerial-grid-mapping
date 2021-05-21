@@ -1,0 +1,60 @@
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #222;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+input, button {
+  font-family: inherit;
+}
+
+a:visited {
+  color: inherit;
+}
+
+header, footer {
+  text-align: center;
+}
+header h1 {
+  margin: 0 0 15px 0;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.5em;
+}
+
+main, nav {
+  max-width: 100%;
+  width: 750px;
+}
+
+main {
+  height: 425px;
+}
+
+nav div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+nav h2 {
+  margin: 0;
+  display: inline;
+}
+
+nav div button {
+  margin: 0;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+}
