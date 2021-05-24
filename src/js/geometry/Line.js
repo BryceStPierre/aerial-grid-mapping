@@ -1,8 +1,10 @@
+import Point from "./Point";
+
 /** Class representing a line on the Cartesian plane. */
 export default class Line {
   /**
-   * @param {(number|Point)} a - The slope, or a point.
-   * @param {(number|Point)} b - The y-intercept, or a point.
+   * @param {(number|Point)} a The slope, or a point.
+   * @param {(number|Point)} b The y-intercept, or a point.
    */
   constructor(a, b) {
     // Construct using a slope and a y-intercept.
@@ -73,10 +75,16 @@ export default class Line {
     );
   }
 
+  /**
+   * @param {number} x1
+   * @param {number} x2
+   * @param {number} graphHeight 
+   * @returns {JSON}
+   */
   asGraphic(x1, x2, graphHeight) {
     return {
-      p1: this.pointAtX(x1).asGraphic(graphHeight),
-      p2: this.pointAtX(x2).asGraphic(graphHeight),
+      start: this.pointAtX(x1).asGraphic(graphHeight),
+      finish: this.pointAtX(x2).asGraphic(graphHeight),
     };
   }
 

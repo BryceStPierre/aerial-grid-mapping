@@ -34,6 +34,10 @@ export default class Point {
     ) < threshold;
   }
 
+  /**
+   * @param {number} graphHeight 
+   * @returns {JSON}
+   */
   asGraphic(graphHeight) {
     return {
       x: this._x,
