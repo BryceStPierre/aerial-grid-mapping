@@ -1,27 +1,37 @@
-/* A point represented on a two-dimensional Cartesian plane. */
-
+/** Class representing a point on the Cartesian plane. */
 export default class Point {
   constructor(x = 0, y = 0) {
     this._x = x;
     this._y = y;
   }
 
-  add(a, b) {
-    this._x += a;
-    this._y += b;
+  add(x, y) {
+    this._x += x;
+    this._y += y;
   }
 
-  multiply(a) {
-    this._x *= a;
-    this._y *= a;
+  multiply(c) {
+    this._x *= c;
+    this._y *= c;
   }
 
   /**
    * @param {Point} p
+   * @returns {Point}
    */
   rotate90DegreesClockwiseAbout(p) {
-    // Based on (x, y) => (y, -x).
-    return new Point(this._y + p.x - p.y, -1 * this._x + p.x + p.y);
+    return new Point(this._y + p.x - p.y, (-1 * this._x) + p.x + p.y);
+  }
+
+  /**
+   * @param {Point} p
+   * @param {number} threshold
+   * @returns {boolean}
+   */
+  isNear(p, threshold) {
+    return Math.sqrt(
+      Math.pow(this._x - p.x, 2) + Math.pow(this._y - p.y, 2)
+    ) < threshold;
   }
 
   asGraphic(graphHeight) {
@@ -43,12 +53,5 @@ export default class Point {
   }
   set y(y) {
     this._y = y;
-  }
-
-  get json() {
-    return {
-      x: this._x,
-      y: this._y,
-    };
   }
 }
