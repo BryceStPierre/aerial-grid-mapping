@@ -87,11 +87,54 @@ export default class Grid {
           this._units.push({
             row: i,
             column: j,
-            polygon: unit
+            polygon: unit,
+            selected: false
           });
         }
       }
     }
+  }
+  
+  /**
+   * @param {number} row 
+   * @param {number} column 
+   * @returns {boolean} 
+   */
+  toggleSelected(row, column) {
+    let index = this._units.findIndex(u => u.row === row && u.column === column);
+    let newState = !this._units[index].selected;
+    this._units[index].selected = newState;
+    return newState;
+  }
+
+  /**
+   * @returns {JSON} 
+   */
+   selectedPortion() {
+    let selectedUnits = this._units.filter(u => u.selected);
+    let rowNumbers = selectedUnits.map(u => u.row);
+    let columnNumbers = selectedUnits.map(u => u.column);
+    
+    let minRow = Math.min(...rowNumbers);
+    let maxRow = Math.max(...rowNumbers);
+    let minColumn = Math.min(...columnNumbers);
+    let maxColumn = Math.max(...columnNumbers);
+
+    let bitmap = [];
+    for (let i = minRow; i <= maxRow; i++) {
+      let row = [];
+      for (let j = minColumn; j <= maxColumn; j++) {
+        let unit = selectedUnits.find(u => u.row === i && u.column === j);
+        row.push(unit ? 1 : 0);
+      }
+      bitmap.push(row);
+    }
+
+    return {
+      selectionWidth: maxColumn - minColumn,
+      selectionHeight: maxRow - minRow,
+      bitmap
+    };
   }
 
   /**
