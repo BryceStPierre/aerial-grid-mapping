@@ -63,6 +63,9 @@ export default class Grid {
       this._negativeSet.push(new Line(line3.slope, nextYIntercept));
       nextYIntercept += v;
     }
+
+    // Uncomment to use this class without a constraint.
+    // this.setConstraint(this._bounds.asPolygon());
   }
 
   /**
