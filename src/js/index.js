@@ -1,15 +1,35 @@
 import "normalize.css";
-import "../css/layout.css";
 import "../css/core.css";
+import "../css/steps.css";
 
 import $ from "jquery";
 
 import {
-  onClickBackButton,
-  onClickNextButton,
+  handleBackNavigation,
+  handleNextNavigation,
 } from "./interactions/navigation";
 
+import { addBasicMap } from "./map/basic";
+import { addStaticMap } from "./map/static";
+
 $(function () {
-  $("#back").on("click", onClickBackButton);
-  $("#next").on("click", onClickNextButton);
+  let map = addBasicMap({
+    lat: 43.665,
+    lng: -79.402,
+  });
+
+  $("#back").on("click", () => {
+    handleBackNavigation();
+  });
+  $("#next").on("click", () => {
+    // addStaticMap(
+    //   $("#map").width(),
+    //   $("#map").height(),
+    //   map.getBounds().getCenter().toJSON(),
+    //   map.getZoom()
+    // );
+    
+    handleNextNavigation();
+  });
+
 });

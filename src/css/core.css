@@ -1,19 +1,61 @@
-section {
-  width: 100%;
-  height: 100%;
-  display: none;
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  background-color: #222;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.active {
-  display: block;
+input, button {
+  font-family: inherit;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  margin: 0;
 }
 
-#stepOne {
-  background-color: cornflowerblue;
+img {
+  max-width: 100%;
 }
-#stepTwo {
-  background-color: palevioletred
+
+a:visited {
+  color: inherit;
 }
-#stepThree {
-  background-color: yellowgreen;
+
+header, footer {
+  text-align: center;
+}
+header h1 {
+  margin: 0 0 1rem 0;
+}
+
+footer p {
+  margin: 0;
+  line-height: 1.5em;
+}
+
+main, nav {
+  max-width: 100%;
+  width: 640px;
+}
+
+main {
+  height: 425px;
+}
+
+nav div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+nav h2 {
+  margin: 0;
+  display: inline;
 }

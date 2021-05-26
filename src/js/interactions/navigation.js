@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-export const onClickBackButton = () => {
+export const handleBackNavigation = () => {
   if ($("#stepThree").hasClass("active")) {
     $("section").removeClass("active");
     $("#stepTwo").addClass("active");
@@ -12,7 +12,7 @@ export const onClickBackButton = () => {
   }
 };
 
-export const onClickNextButton = () => {
+export const handleNextNavigation = () => {
   if ($("#stepOne").hasClass("active")) {
     $("section").removeClass("active");
     $("#stepTwo").addClass("active");
