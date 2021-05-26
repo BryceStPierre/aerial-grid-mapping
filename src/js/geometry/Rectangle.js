@@ -9,15 +9,39 @@ export default class Rectangle {
   }
 
   /**
-   * @param {Point} p
+   * @param {Point} point
    */
-  setOrigin(p) {
-    this._origin = p;
+  setOrigin(point) {
+    this._origin = point;
   }
 
   /**
-   * 
-   * @param {number} graphHeight 
+   * @param {Point} point
+   * @returns {boolean}
+   */
+  containsPoint(point) {
+    let x =
+      point.x >= this._origin.x && point.x <= this._origin.x + this._width;
+    let y =
+      point.y <= this._origin.y && point.y >= this._origin.y - this._height;
+    return x && y;
+  }
+
+  /**
+   * @param {Polygon} polygon
+   * @returns {boolean}
+   */
+  containsPolygon(polygon) {
+    let contains = true;
+    polygon.points.forEach((p) => {
+      contains = contains && this.containsPoint(p);
+    });
+    return contains;
+  }
+
+  /**
+   *
+   * @param {number} graphHeight
    * @returns {JSON}
    */
   asGraphic(graphHeight) {
