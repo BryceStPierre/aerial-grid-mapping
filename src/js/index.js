@@ -4,11 +4,7 @@ import "../css/steps.css";
 
 import $ from "jquery";
 
-import {
-  handleBackNavigation,
-  handleNextNavigation,
-} from "./interactions/navigation";
-
+import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap } from "./map/basic";
 import { addStaticMap } from "./map/static";
 
