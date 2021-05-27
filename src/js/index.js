@@ -21,15 +21,17 @@ $(function () {
   $("#back").on("click", () => {
     handleBackNavigation();
   });
+
   $("#next").on("click", () => {
-    // addStaticMap(
-    //   $("#map").width(),
-    //   $("#map").height(),
-    //   map.getBounds().getCenter().toJSON(),
-    //   map.getZoom()
-    // );
-    
+    if ($("#stepOne").hasClass("active")) {
+      addStaticMap(
+        $("#map").width(),
+        $("#map").height(),
+        map.getBounds().getCenter().toJSON(),
+        map.getZoom()
+      );
+    }
+
     handleNextNavigation();
   });
-
 });

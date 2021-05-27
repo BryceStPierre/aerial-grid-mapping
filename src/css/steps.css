@@ -1,18 +1,20 @@
-section {
+section,
+#staticMap {
   width: 100%;
   height: 100%;
   display: none;
 }
 
 .active {
-  display: block;
+  display: block !important;
 }
 
-#stepThree {
-  background-color: yellowgreen;
+main {
+  position: relative;
 }
 
-#map {
+#map,
+svg {
   width: 100%;
   height: 100%;
 }
@@ -24,4 +26,12 @@ section {
   width: 60%;
   margin: 1rem;
   box-shadow: 0 0 1rem;
+}
+
+#stepTwo,
+#stepThree {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
 }

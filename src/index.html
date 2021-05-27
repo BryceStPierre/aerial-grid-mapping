@@ -17,6 +17,8 @@
     </header>
 
     <main>
+      <img id="staticMap" data-api-key="<%= htmlWebpackPlugin.options.apiKey %>">
+
       <!-- Step 1: Find a location. -->
       <section id="stepOne" class="active">
         <input
@@ -30,11 +32,13 @@
 
       <!-- Step 2: Select a region. -->
       <section id="stepTwo">
-        <img id="staticMap" data-api-key="<%= htmlWebpackPlugin.options.apiKey %>">
+        <svg></svg>
       </section>
 
       <!-- Step 3: Select units in the grid map. -->
-      <section id="stepThree"></section>
+      <section id="stepThree">
+        <svg></svg>
+      </section>
     </main>
 
     <nav>
