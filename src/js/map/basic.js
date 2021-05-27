@@ -29,12 +29,12 @@ export const addBasicMap = (center) => {
     if (places.length == 0) {
       return;
     }
-    // Clear out the old markers.
+    
     markers.forEach((marker) => {
       marker.setMap(null);
     });
     markers = [];
-    // For each place, get the icon, name and location.
+    
     const bounds = new google.maps.LatLngBounds();
     places.forEach((place) => {
       if (!place.geometry || !place.geometry.location) {
@@ -42,7 +42,6 @@ export const addBasicMap = (center) => {
         return;
       }
 
-      // Create a marker for each place.
       markers.push(
         new google.maps.Marker({
           map,
@@ -51,12 +50,10 @@ export const addBasicMap = (center) => {
         })
       );
 
-      if (place.geometry.viewport) {
-        // Only geocodes have viewport.
+      if (place.geometry.viewport)
         bounds.union(place.geometry.viewport);
-      } else {
+      else
         bounds.extend(place.geometry.location);
-      }
     });
     map.fitBounds(bounds);
     map.setZoom(19);
