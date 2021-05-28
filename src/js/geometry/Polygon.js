@@ -57,8 +57,11 @@ export default class Polygon {
    * @returns {JSON}
    */
   asGraphic(graphHeight) {
+    let points = this._points.map((p) => p.asGraphic(graphHeight));
+
     return {
-      points: this._points.map((p) => p.asGraphic(graphHeight)),
+      pointArray: points,
+      pointString: points.map((p) => `${p.x},${p.y}`).join(" ")
     };
   }
 

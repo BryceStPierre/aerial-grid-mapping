@@ -8,6 +8,10 @@ import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
 
+// Example
+import { createPoint } from "./ui/svg";
+import Point from "./geometry/Point";
+
 $(function () {
   let map = addBasicMap({
     lat: 43.665,
@@ -36,6 +40,10 @@ $(function () {
         map.getBounds().getNorthEast().toJSON(),
         map.getBounds().getSouthWest().toJSON()
       );
+      
+      // Example
+      let p = new Point(250, 250);
+      $("#stepTwo svg").append(createPoint(p.asGraphic(height)));
     }
 
     handleNextNavigation();
