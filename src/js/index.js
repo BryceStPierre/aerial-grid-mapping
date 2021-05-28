@@ -5,8 +5,8 @@ import "../css/steps.css";
 import $ from "jquery";
 
 import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
-import { addBasicMap } from "./map/basic";
-import { addStaticMap } from "./map/static";
+import { addBasicMap, addStaticMap } from "./ui/map";
+import { establishScale } from "./utils/geography";
 
 $(function () {
   let map = addBasicMap({
@@ -20,11 +20,21 @@ $(function () {
 
   $("#next").on("click", () => {
     if ($("#stepOne").hasClass("active")) {
+      const width = $("#map").width();
+      const height = $("#map").height();
+
       addStaticMap(
-        $("#map").width(),
-        $("#map").height(),
+        width,
+        height,
         map.getBounds().getCenter().toJSON(),
         map.getZoom()
+      );
+
+      const scale = establishScale(
+        width,
+        height,
+        map.getBounds().getNorthEast().toJSON(),
+        map.getBounds().getSouthWest().toJSON()
       );
     }
 

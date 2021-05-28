@@ -7,8 +7,8 @@ const convertToRadians = (angle) => (angle * Math.PI) / 180;
 /**
  * A formula for computing the great-circle distance between two points.
  * Source: https://www.movable-type.co.uk/scripts/latlong.html
- * @param {JSON} positionA 
- * @param {JSON} positionB 
+ * @param {JSON} positionA
+ * @param {JSON} positionB
  * @returns {number} The computed distance in metres.
  */
 const haversineFormula = (positionA, positionB) => {
@@ -25,25 +25,25 @@ const haversineFormula = (positionA, positionB) => {
 };
 
 /**
- * @param {number} width 
- * @param {number} height 
+ * @param {number} width
+ * @param {number} height
  * @param {LatLngBounds} mapBounds
  * @returns {JSON}
  */
- export const establishScale = (width, height, mapBounds) => {
+export const establishScale = (
+  width,
+  height,
+  northEastPosition,
+  southWestPosition
+) => {
   // Compute the pixel distance between upper-right and lower-left
   // corners of the map.
-  const pixels = Math.sqrt(
-    Math.pow(width, 2) + Math.pow(height, 2)
-  );
+  const pixels = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
 
   // Compute the physical distance in meters between north-east and
   // south-west coordinates of the map.
-  const meters = haversineFormula(
-    mapBounds.getNorthEast().toJSON(),
-    mapBounds.getSouthWest().toJSON()
-  );
+  const meters = haversineFormula(northEastPosition, southWestPosition);
 
-  // (This figure can be multipled by to convert pixels to meters.)
-  return meters / pixels; 
+  // (This figure can be used in multiplication to convert pixels to meters.)
+  return meters / pixels;
 };
