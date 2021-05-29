@@ -7,10 +7,7 @@ import $ from "jquery";
 import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
-
-// Example
-import { createPoint } from "./ui/svg";
-import Point from "./geometry/Point";
+import { addStepTwoCanvas } from "./ui/canvas";
 
 $(function () {
   let map = addBasicMap({
@@ -41,9 +38,7 @@ $(function () {
         map.getBounds().getSouthWest().toJSON()
       );
       
-      // Example
-      let p = new Point(250, 250);
-      $("#stepTwo svg").append(createPoint(p.asGraphic(height)));
+      addStepTwoCanvas(width, height, "#stepTwo svg");
     }
 
     handleNextNavigation();

@@ -35,3 +35,7 @@ svg {
   position: absolute;
   top: 0;
 }
+
+rect.background {
+  fill: rgba(0, 0, 0, 0.4);
+}
