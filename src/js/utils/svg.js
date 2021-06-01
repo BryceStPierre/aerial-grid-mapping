@@ -48,9 +48,9 @@ export const createPolygon = (polygon, editable = false) => {
       document.createElementNS("http://www.w3.org/2000/svg", "circle")
     )
       .attr("class", "vertex")
-      .attr("r", 10)
-      .attr("x", p.x)
-      .attr("y", p.y);
+      .attr("r", 15)
+      .attr("cx", p.x)
+      .attr("cy", p.y);
 
     polygonGroup.append(vertex);
   });

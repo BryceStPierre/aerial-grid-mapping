@@ -36,6 +36,24 @@ svg {
   top: 0;
 }
 
-rect.background {
-  fill: rgba(0, 0, 0, 0.4);
+rect.overlay {
+  fill: rgba(0, 0, 0, 0.55);
+}
+
+.constraint .polygon,
+.constraint .vertex {
+  stroke: #fff;
+}
+
+.constraint .polygon {
+  fill: rgba(255, 255, 255, 0.3);
+}
+
+.constraint .vertex {
+  fill: transparent;
+}
+
+.constraint .vertex:hover {
+  fill: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
 }
