@@ -7,7 +7,7 @@ import $ from "jquery";
 export const createPoint = (point) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "circle"))
     .attr("class", "point")
-    .attr("r", 50)
+    .attr("r", 5)
     .attr("cx", point.x)
     .attr("cy", point.y);
 };
