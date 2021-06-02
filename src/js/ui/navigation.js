@@ -1,6 +1,6 @@
 import $ from "jquery";
 
-import { strings } from "../config";
+import { strings } from "../config/constants";
 
 export const handleBackNavigation = () => {
   if ($("#stepThree").hasClass("active")) {

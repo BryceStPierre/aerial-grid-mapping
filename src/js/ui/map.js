@@ -4,7 +4,7 @@ export const addBasicMap = (center) => {
   let mapOptions = {
     center,
     tilt: 0,
-    zoom: 19,
+    zoom: 11,
     mapTypeControl: false,
     rotateControl: false,
     mapTypeControl: false,
@@ -58,7 +58,7 @@ export const addBasicMap = (center) => {
         bounds.extend(place.geometry.location);
     });
     map.fitBounds(bounds);
-    map.setZoom(19);
+    map.setZoom(20);
   });
 
   return map;
