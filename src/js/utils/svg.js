@@ -6,7 +6,7 @@ import $ from "jquery";
  */
 export const createPoint = (point) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "circle"))
-    .attr("class", "point")
+    .attr("class", `point ${point.classNames}`)
     .attr("r", 5)
     .attr("cx", point.x)
     .attr("cy", point.y);
@@ -18,7 +18,7 @@ export const createPoint = (point) => {
  */
 export const createLine = (line) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "line"))
-    .attr("class", "line")
+    .attr("class", `line ${line.classNames}`)
     .attr("x1", line.start.x)
     .attr("y1", line.start.y)
     .attr("x2", line.finish.x)
@@ -36,7 +36,10 @@ export const createPolygon = (polygon, editable = false) => {
     .attr("class", "polygon")
     .attr("points", polygon.pointString);
 
-  if (!editable) return polygonElement;
+  if (!editable) {
+    polygonElement.addClass(polygon.classNames);
+    return polygonElement;
+  }
 
   let polygonGroup = $(
     document.createElementNS("http://www.w3.org/2000/svg", "g")
@@ -54,6 +57,7 @@ export const createPolygon = (polygon, editable = false) => {
 
     polygonGroup.append(vertex);
   });
+  polygonGroup.addClass(polygon.classNames);
 
   return polygonGroup;
 };
@@ -64,7 +68,7 @@ export const createPolygon = (polygon, editable = false) => {
  */
 export const createRectangle = (rectangle) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "rect"))
-    .attr("class", "rectangle")
+    .attr("class", `rectangle ${rectangle.classNames}`)
     .attr("x", rectangle.origin.x)
     .attr("y", rectangle.origin.y)
     .attr("width", rectangle.width)

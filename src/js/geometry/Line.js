@@ -24,9 +24,12 @@ export default class Line {
     }
 
     // Adjust the slope value for horizontal and vertical lines.
-    if (this._slope === 0) this._slope = 0.0001;
-    // Horizontal.
-    else if (isNaN(this._slope)) this._slope = -500; // Vertical.
+    if (this._slope === 0) 
+      this._slope = 0.0001; // Horizontal.
+    else if (isNaN(this._slope)) 
+      this._slope = -500; // Vertical.
+
+    this._classNames = [];
   }
 
   /**
@@ -85,16 +88,30 @@ export default class Line {
     return {
       start: this.pointAtX(x1).asGraphic(graphHeight),
       finish: this.pointAtX(x2).asGraphic(graphHeight),
+      classNames: this._classNames.join(" ")
     };
+  }
+
+  /**
+   * @param {string} className 
+   */
+  addClassName(className) {
+    this._classNames.push(className);
   }
 
   get slope() {
     return this._slope;
   }
+
   get yIntercept() {
     return this._yIntercept;
   }
+
   get inverseSlope() {
     return -1 / this._slope;
+  }
+
+  get classNames() {
+    return this._classNames.join(" ");
   }
 }
