@@ -1,4 +1,6 @@
 import Point from "../geometry/Point";
+import Polygon from "../geometry/Polygon";
+import Rectangle from "../geometry/Rectangle";
 import GraphicsManager from "../utils/GraphicsManager";
 
 import { graphicTypes } from "../config/constants";
@@ -10,25 +12,19 @@ import { graphicTypes } from "../config/constants";
  */
 export const addStepTwoCanvas = (width, height, svgSelector) => {
   let manager = new GraphicsManager(width, height, svgSelector);
-  manager.addGraphic(new Point(150, 150), graphicTypes.POINT);
 
   // Add overlay over top of static map image.
-  // let overlayRect = new Rectangle(width, height - 25);
-  // overlayRect.setOrigin(new Point(0, height));
-  // let overlay = createRectangle(overlayRect.asGraphic(height));
-  // overlay.addClass("overlay");
-  // $(baseSelector).append(overlay);
+  let overlay = new Rectangle(width, height);
+  overlay.addClassName("overlay");
+  manager.addGraphic(overlay, graphicTypes.RECTANGLE);
 
-  // // Add a parallelogram used for constraining the grid region.
-  // let constraintPoly = new Polygon([
-  //   new Point(0.2 * width, 0.75 * height),
-  //   new Point(0.6 * width, 0.75 * height),
-  //   new Point(0.8 * width, 0.25 * height),
-  //   new Point(0.4 * width, 0.25 * height)
-  // ]);
-  // let constraint = createPolygon(constraintPoly.asGraphic(height), true, function (i) {
-  //   constraintPoly.translate()
-  // });
-  // constraint.addClass("constraint");
-  // $(baseSelector).append(constraint);
+  // Add a parallelogram used for constraining the grid region.
+  let constraint = new Polygon([
+    new Point(0.2 * width, 0.75 * height),
+    new Point(0.6 * width, 0.75 * height),
+    new Point(0.8 * width, 0.25 * height),
+    new Point(0.4 * width, 0.25 * height)
+  ]);
+  constraint.addClassName("constraint");
+  manager.addGraphic(constraint, graphicTypes.POLYGON);
 };

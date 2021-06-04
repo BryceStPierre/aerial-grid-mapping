@@ -1,14 +1,14 @@
 import $ from "jquery";
-import {
-  createPoint,
-  createLine,
-  createPolygon,
-  createRectangle,
-} from "./svg";
+import { createPoint, createLine, createPolygon, createRectangle } from "./svg";
 import { graphicTypes } from "../config/constants";
 
 /** Class representing a polygon on the Cartesian plane. */
 export default class GraphicsManager {
+  /**
+   * @param {number} width
+   * @param {number} height
+   * @param {string} svgSelector
+   */
   constructor(width, height, svgSelector) {
     this._width = width;
     this._height = height;
@@ -20,9 +20,10 @@ export default class GraphicsManager {
     $(this._svgSelector).on("mouseup", this.handleMouseUp);
   }
 
-  handleMouseDown = (index) => {
+  handleMouseDown = (index, vertex) => {
     this._isDragging = true;
     this._selectedIndex = index;
+    this._selectedVertex = vertex;
   };
 
   handleMouseMove = (e) => {
@@ -30,10 +31,13 @@ export default class GraphicsManager {
       this._isDragging &&
       this._graphicTypes[this._selectedIndex] === graphicTypes.POLYGON
     ) {
-      let cartesianX = e.offsetX;
-      let cartesianY = this._height - e.offsetY;
-      this._graphics[this._selectedIndex].x = cartesianX;
-      this._graphics[this._selectedIndex].y = cartesianY;
+      const cartesianX = e.offsetX;
+      const cartesianY = this._height - e.offsetY;
+      this._graphics[this._selectedIndex].translatePoint(
+        this._selectedVertex,
+        cartesianX,
+        cartesianY
+      );
       this.render();
     }
   };
@@ -57,15 +61,17 @@ export default class GraphicsManager {
       let element;
       if (this._graphicTypes[i] === graphicTypes.POINT) {
         element = createPoint(g.asGraphic(this._height));
-      // TODO: Add line.
-      // } else if (this._graphicTypes[i] === graphicTypes.LINE) {
-      //   element = createLine(g.asGraphic(this._height));
+      } else if (this._graphicTypes[i] === graphicTypes.LINE) {
+        element = createLine(g.asGraphic(0, this._width, this._height));
       } else if (this._graphicTypes[i] === graphicTypes.RECTANGLE) {
         element = createRectangle(g.asGraphic(this._height));
       } else if (this._graphicTypes[i] === graphicTypes.POLYGON) {
         element = createPolygon(g.asGraphic(this._height), true);
-        // TODO: Add mousedown to polygonVertices.
-        // element.on("mousedown", () => this.handleMouseDown(i));
+        element.children(".vertex").each((vertexIndex, vertexElement) => {
+          $(vertexElement).on("mousedown", () =>
+            this.handleMouseDown(i, vertexIndex)
+          );
+        });
       }
       $(this._svgSelector).append(element);
     });
