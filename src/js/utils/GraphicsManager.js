@@ -2,7 +2,7 @@ import $ from "jquery";
 import { createPoint, createLine, createPolygon, createRectangle } from "./svg";
 import { graphicTypes } from "../config/constants";
 
-/** Class representing a polygon on the Cartesian plane. */
+/** Class managing the graphics objects within a SVG element.  */
 export default class GraphicsManager {
   /**
    * @param {number} width
@@ -20,12 +20,21 @@ export default class GraphicsManager {
     $(this._svgSelector).on("mouseup", this.handleMouseUp);
   }
 
-  handleMouseDown = (index, vertex) => {
+  /**
+   * Handle drag start.
+   * @param {number} graphicIndex
+   * @param {number} vertexIndex
+   */
+  handleMouseDown = (graphicIndex, vertexIndex) => {
     this._isDragging = true;
-    this._selectedIndex = index;
-    this._selectedVertex = vertex;
+    this._selectedIndex = graphicIndex;
+    this._selectedVertex = vertexIndex;
   };
 
+  /**
+   * Handle drag effect, currently only for Polygon objects.
+   * @param {MouseEvent} e
+   */
   handleMouseMove = (e) => {
     if (
       this._isDragging &&
@@ -42,21 +51,29 @@ export default class GraphicsManager {
     }
   };
 
-  handleMouseUp = (e) => {
+  /**
+   * Handle drag finish.
+   */
+  handleMouseUp = () => {
     this._isDragging = false;
   };
 
+  /**
+   * @param {object} graphic
+   * @param {number} graphicType
+   */
   addGraphic(graphic, graphicType) {
     this._graphics.push(graphic);
     this._graphicTypes.push(graphicType);
     this.render();
   }
 
+  /**
+   * Clear graphics and display them in their current state.
+   */
   render() {
-    // Clear SVG contents.
     $(this._svgSelector).html("");
 
-    // Append updated SVG contents.
     this._graphics.forEach((g, i) => {
       let element;
       if (this._graphicTypes[i] === graphicTypes.POINT) {
