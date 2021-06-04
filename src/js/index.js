@@ -7,7 +7,7 @@ import $ from "jquery";
 import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
-import { addStepTwoCanvas } from "./ui/canvas";
+import { addStepTwoCanvas, addStepThreeCanvas } from "./ui/canvas";
 
 $(function () {
   let map = addBasicMap({
@@ -20,6 +20,7 @@ $(function () {
   });
 
   $("#next").on("click", () => {
+    // Initialize step two.
     if ($("#stepOne").hasClass("active")) {
       const width = $("#map").width();
       const height = $("#map").height();
@@ -39,6 +40,10 @@ $(function () {
       );
       
       addStepTwoCanvas(width, height, "#stepTwo svg");
+    } 
+    // Initialize step three.
+    else if ($("#stepTwo").hasClass("active")) {
+      addStepThreeCanvas(width, height, "#stepThree svg");
     }
 
     handleNextNavigation();

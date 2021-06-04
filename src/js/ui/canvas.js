@@ -8,7 +8,7 @@ import { graphicTypes } from "../config/constants";
 /**
  * @param {number} width
  * @param {number} height
- * @param {string} selector
+ * @param {string} svgSelector
  */
 export const addStepTwoCanvas = (width, height, svgSelector) => {
   let manager = new GraphicsManager(width, height, svgSelector);
@@ -28,3 +28,12 @@ export const addStepTwoCanvas = (width, height, svgSelector) => {
   constraint.addClassName("constraint");
   manager.addGraphic(constraint, graphicTypes.POLYGON);
 };
+
+/**
+ * @param {number} width
+ * @param {number} height
+ * @param {string} svgSelector
+ */
+export const addStepThreeCanvas = (width, height, svgSelector) => {
+  console.log("Step Three");
+}
