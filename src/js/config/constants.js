@@ -3,6 +3,7 @@ export const graphicTypes = {
   LINE: 1,
   RECTANGLE: 2,
   POLYGON: 3,
+  GRID: 4,
 };
 
 export const strings = {

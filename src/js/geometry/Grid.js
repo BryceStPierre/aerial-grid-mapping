@@ -2,9 +2,12 @@ import Point from "./Point";
 import Line from "./Line";
 import Rectangle from "./Rectangle";
 import Polygon from "./Polygon";
+import { graphicTypes } from "../config/constants";
 
 /** Class representing a grid on the Cartesian plane. */
 export default class Grid {
+  static type = graphicTypes.GRID;
+
   /**
    * @param {number} graphWidth
    * @param {number} graphHeight
@@ -12,8 +15,8 @@ export default class Grid {
    * @param {Line} initialLine
    */
   constructor(graphWidth, graphHeight, unitSize, line1) {
-    this._unitSize = unitSize;
     this._bounds = new Rectangle(graphWidth, graphHeight);
+    this._unitSize = unitSize;
 
     const u = unitSize * Math.sqrt(Math.pow(line1.slope, 2) + 1);
 
@@ -157,7 +160,9 @@ export default class Grid {
       }),
       "units": this._units.map(u => {
         let unit = u;
-        unit.polygon = u.polygon.asGraphic(graphHeight);
+        if (u.selected)
+          unit.polygon.addClassName("selected");
+        unit.polygon = unit.polygon.asGraphic(graphHeight);
         return unit;
       })
     }

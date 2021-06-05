@@ -2,7 +2,7 @@ import $ from "jquery";
 
 /**
  * @param {JSON} point
- * @returns {HTMLElement}
+ * @returns {SVGElement}
  */
 export const createPoint = (point) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "circle"))
@@ -14,7 +14,7 @@ export const createPoint = (point) => {
 
 /**
  * @param {JSON} line
- * @returns {HTMLElement}
+ * @returns {SVGElement}
  */
 export const createLine = (line) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "line"))
@@ -26,8 +26,21 @@ export const createLine = (line) => {
 };
 
 /**
+ * @param {JSON} rectangle
+ * @returns {SVGElement}
+ */
+export const createRectangle = (rectangle) => {
+  return $(document.createElementNS("http://www.w3.org/2000/svg", "rect"))
+    .attr("class", `rectangle ${rectangle.classNames}`)
+    .attr("x", rectangle.origin.x)
+    .attr("y", rectangle.origin.y)
+    .attr("width", rectangle.width)
+    .attr("height", rectangle.height);
+};
+
+/**
  * @param {JSON} polygon
- * @returns {HTMLElement}
+ * @returns {SVGElement}
  */
 export const createPolygon = (polygon, editable = false) => {
   let polygonElement = $(
@@ -63,14 +76,41 @@ export const createPolygon = (polygon, editable = false) => {
 };
 
 /**
- * @param {JSON} rectangle
- * @returns {HTMLElement}
+ * @param {JSON} gridUnit
+ * @returns {SVGElement}
  */
-export const createRectangle = (rectangle) => {
-  return $(document.createElementNS("http://www.w3.org/2000/svg", "rect"))
-    .attr("class", `rectangle ${rectangle.classNames}`)
-    .attr("x", rectangle.origin.x)
-    .attr("y", rectangle.origin.y)
-    .attr("width", rectangle.width)
-    .attr("height", rectangle.height);
+export const createGridUnit = (gridUnit) => {
+  return $(document.createElementNS("http://www.w3.org/2000/svg", "polygon"))
+    .attr("points", gridUnit.polygon.pointString)
+    .attr("class", `polygon ${gridUnit.polygon.classNames}`)
+    .attr("data-row", gridUnit.row)
+    .attr("data-column", gridUnit.column);
+};
+
+/**
+ * @param {JSON} grid
+ * @returns {SVGElement}
+ */
+export const createGrid = (grid) => {
+  let gridGroup = $(
+    document.createElementNS("http://www.w3.org/2000/svg", "g")
+  ).attr("class", "grid");
+
+  let lineGroup = $(
+    document.createElementNS("http://www.w3.org/2000/svg", "g")
+  ).attr("class", "lines");
+  grid.lines
+    .map((line) => createLine(line))
+    .forEach((line) => lineGroup.append(line));
+
+  let unitGroup = $(
+    document.createElementNS("http://www.w3.org/2000/svg", "g")
+  ).attr("class", "units");
+  grid.units
+    .map((unit) => createGridUnit(unit))
+    .forEach((unit) => unitGroup.append(unit));
+
+  gridGroup.append(lineGroup);
+  gripGroup.append(unitGroup);
+  return gridGroup;
 };

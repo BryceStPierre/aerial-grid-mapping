@@ -1,7 +1,10 @@
 import Point from "./Point";
+import { graphicTypes } from "../config/constants";
 
 /** Class representing a rectangle on the Cartesian plane. */
 export default class Rectangle {
+  static type = graphicTypes.RECTANGLE;
+
   /**
    * @param {number} width 
    * @param {number} height 

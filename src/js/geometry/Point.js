@@ -1,5 +1,9 @@
+import { graphicTypes } from "../config/constants";
+
 /** Class representing a point on the Cartesian plane. */
 export default class Point {
+  static type = graphicTypes.POINT;
+
   /**
    * @param {number} x 
    * @param {number} y 

@@ -7,7 +7,7 @@ import $ from "jquery";
 import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
-import { addStepTwoCanvas, addStepThreeCanvas } from "./ui/canvas";
+import { addStepTwoGraphics, addStepThreeGraphics } from "./ui/graphics";
 
 $(function () {
   let map = addBasicMap({
@@ -39,11 +39,11 @@ $(function () {
         map.getBounds().getSouthWest().toJSON()
       );
       
-      addStepTwoCanvas(width, height, "#stepTwo svg");
+      addStepTwoGraphics(width, height, "#stepTwo svg");
     } 
     // Initialize step three.
     else if ($("#stepTwo").hasClass("active")) {
-      addStepThreeCanvas(width, height, "#stepThree svg");
+      addStepThreeGraphics(width, height, "#stepThree svg");
     }
 
     handleNextNavigation();

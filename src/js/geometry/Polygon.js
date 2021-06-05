@@ -1,8 +1,11 @@
 import Point from "./Point";
 import Line from "./Line";
+import { graphicTypes } from "../config/constants";
 
 /** Class representing a polygon on the Cartesian plane. */
 export default class Polygon {
+  static type = graphicTypes.POLYGON;
+
   /**
    * @param {Point[]} points
    */
