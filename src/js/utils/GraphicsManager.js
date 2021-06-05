@@ -6,6 +6,7 @@ import {
   createRectangle,
   createGrid,
 } from "./svg";
+import { playDeselectAudio, playSelectAudio } from "../utils/audio";
 import { graphicTypes } from "../config/constants";
 
 /** Class managing the graphics objects within a parent SVG element.  */
@@ -72,8 +73,16 @@ export default class GraphicsManager {
     this._isDragging = false;
   };
 
+  /**
+   * 
+   * @param {number} graphicIndex 
+   * @param {number} row 
+   * @param {number} column 
+   */
   handleClickGridUnit = (graphicIndex, row, column) => {
-    this._graphics[graphicIndex].toggleSelected(row, column);
+    let isSelected = this._graphics[graphicIndex].toggleSelected(row, column);
+    if (isSelected) playSelectAudio();
+    else playDeselectAudio();
     this.render();
   };
 
@@ -99,13 +108,13 @@ export default class GraphicsManager {
       } else if (g.type === graphicTypes.GRID) {
         svgElement = createGrid(g.asGraphic(this._height));
         svgElement.children(".units polygon").each((index, element) => {
-          $(element).on("click", () =>
+          $(element).on("click", () => {
             this.handleClickGridUnit(
               i,
               $(element).data("row"),
               $(element).data("column")
-            )
-          );
+            );
+          });
         });
       }
       $(this._svgSelector).append(svgElement);
