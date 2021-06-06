@@ -12,14 +12,24 @@ export default class Polygon {
   constructor(points) {
     this._points = points;
     this._classNames = [];
+    this._onUpdate = null;
   }
 
+  /**
+   * @param {number} x 
+   * @param {number} y 
+   */
   translate(x, y) {
     this._points = this._points.map((p) => p.add(x, y));
+    if (this._onUpdate) this._onUpdate(this);
   }
 
+  /**
+   * @param {number} c 
+   */
   scale(c) {
     this._points = this._points.map((p) => p.multiply(c));
+    if (this._onUpdate) this._onUpdate(this);
   }
 
   /**
@@ -30,6 +40,7 @@ export default class Polygon {
   translatePoint(index, x, y) {
     this._points[index].x = x;
     this._points[index].y = y;
+    if (this._onUpdate) this._onUpdate(this);
   }
 
   /**
@@ -37,7 +48,7 @@ export default class Polygon {
    * @returns {boolean}
    */
   containsPoint(point) {
-    // Based on https://stackoverflow.com/questions/22521982/check-if-point-is-inside-a-polygon.
+    // Source: https://stackoverflow.com/questions/22521982/check-if-point-is-inside-a-polygon
     let contains = false;
     let x = point.x;
     let y = point.y;
@@ -87,6 +98,10 @@ export default class Polygon {
     this._classNames.push(className);
   }
 
+  set points(points) {
+    this._points = points;
+  }
+
   get points() {
     return this._points;
   }
@@ -102,5 +117,13 @@ export default class Polygon {
 
   get classNames() {
     return this._classNames.join(" ");
+  }
+
+  get onUpdate() {
+    return this._onUpdate;
+  }
+
+  set onUpdate(onUpdate) {
+    this._onUpdate = onUpdate;
   }
 }

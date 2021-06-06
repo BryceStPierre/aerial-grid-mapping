@@ -24,6 +24,10 @@ export const addStepTwoGraphics = (width, height, svgSelector) => {
     new Point(0.4 * width, 0.25 * height)
   ]);
   constraint.addClassName("constraint");
+  constraint.onUpdate = (polygon) => {
+    console.log(polygon);
+    //store("constraint", polygon);
+  }
   manager.addGraphic(constraint);
 };
 
