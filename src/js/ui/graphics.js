@@ -2,6 +2,9 @@ import Point from "../geometry/Point";
 import Polygon from "../geometry/Polygon";
 import Rectangle from "../geometry/Rectangle";
 import GraphicsManager from "../utils/GraphicsManager";
+import { createPolygon, createMask, createRectangle } from "../utils/svg";
+import { store, retrieve } from "../utils/localStorage";
+import $ from "jquery";
 
 /**
  * @param {number} width
@@ -21,13 +24,10 @@ export const addStepTwoGraphics = (width, height, svgSelector) => {
     new Point(0.2 * width, 0.75 * height),
     new Point(0.6 * width, 0.75 * height),
     new Point(0.8 * width, 0.25 * height),
-    new Point(0.4 * width, 0.25 * height)
+    new Point(0.4 * width, 0.25 * height),
   ]);
   constraint.addClassName("constraint");
-  constraint.onUpdate = (polygon) => {
-    console.log(polygon);
-    //store("constraint", polygon);
-  }
+  constraint.onUpdate = (polygon) => store("constraint", polygon);
   manager.addGraphic(constraint);
 };
 
@@ -37,5 +37,28 @@ export const addStepTwoGraphics = (width, height, svgSelector) => {
  * @param {string} svgSelector
  */
 export const addStepThreeGraphics = (width, height, svgSelector) => {
-  console.log("Step Three");
-}
+  let maskRect = new Rectangle(width, height);
+  maskRect = createRectangle(maskRect.asGraphic(height));
+  maskRect.attr("fill", "#fff");
+
+  let maskPolygon = new Polygon(
+    retrieve("constraint")._points.map((p) => new Point(p._x, p._y))
+  );
+  maskPolygon = createPolygon(maskPolygon.asGraphic(height), false);
+  maskPolygon.attr("fill", "#000");
+
+  // Add mask to trace constraint polygon.
+  let mask = createMask("overlayMask");
+  mask.append(maskRect);
+  mask.append(maskPolygon);
+  $(svgSelector).append(mask);
+
+  // Add overlay to highlight mask.
+  let overlay = new Rectangle(width, height);
+  overlay.addClassName("dark");
+  overlay = createRectangle(overlay.asGraphic(height));
+  overlay.attr("mask", "url(#overlayMask)");
+  $(svgSelector).append(overlay);
+
+  //let manager = new GraphicsManager(width, height, svgSelector);
+};

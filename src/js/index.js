@@ -8,6 +8,7 @@ import { handleBackNavigation, handleNextNavigation } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
 import { addStepTwoGraphics, addStepThreeGraphics } from "./ui/graphics";
+import { retrieve, store } from "./utils/localStorage";
 
 $(function () {
   let map = addBasicMap({
@@ -24,6 +25,8 @@ $(function () {
     if ($("#stepOne").hasClass("active")) {
       const width = $("#map").width();
       const height = $("#map").height();
+      store("width", width);
+      store("height", height);
 
       addStaticMap(
         width,
@@ -43,6 +46,9 @@ $(function () {
     } 
     // Initialize step three.
     else if ($("#stepTwo").hasClass("active")) {
+      const width = retrieve("width");
+      const height = retrieve("height");
+
       addStepThreeGraphics(width, height, "#stepThree svg");
     }
 

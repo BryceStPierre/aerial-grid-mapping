@@ -76,6 +76,15 @@ export const createPolygon = (polygon, editable = false) => {
 };
 
 /**
+ * @param {string} maskId 
+ * @returns {SVGElement}
+ */
+export const createMask = (maskId) => {
+  return $(document.createElementNS("http://www.w3.org/2000/svg", "mask"))
+    .attr("id", maskId);
+};
+
+/**
  * @param {JSON} gridUnit
  * @returns {SVGElement}
  */
