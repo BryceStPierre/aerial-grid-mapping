@@ -3,8 +3,6 @@ import { graphicTypes } from "../config/constants";
 
 /** Class representing a rectangle on the Cartesian plane. */
 export default class Rectangle {
-  static type = graphicTypes.RECTANGLE;
-
   /**
    * @param {number} width 
    * @param {number} height 
@@ -14,6 +12,7 @@ export default class Rectangle {
     this._height = height;
     this._origin = new Point(0, height); // Top left corner.
     this._classNames = [];
+    this._type = graphicTypes.RECTANGLE;
   }
 
   /**
@@ -81,5 +80,9 @@ export default class Rectangle {
 
   get classNames() {
     return this._classNames.join(" ");
+  }
+
+  get type() {
+    return this._type;
   }
 }

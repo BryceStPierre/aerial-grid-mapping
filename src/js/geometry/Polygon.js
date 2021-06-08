@@ -4,14 +4,13 @@ import { graphicTypes } from "../config/constants";
 
 /** Class representing a polygon on the Cartesian plane. */
 export default class Polygon {
-  static type = graphicTypes.POLYGON;
-
   /**
    * @param {Point[]} points
    */
   constructor(points) {
     this._points = points;
     this._classNames = [];
+    this._type = graphicTypes.POLYGON;
     this._onUpdate = null;
   }
 
@@ -117,6 +116,10 @@ export default class Polygon {
 
   get classNames() {
     return this._classNames.join(" ");
+  }
+
+  get type() {
+    return this._type;
   }
 
   get onUpdate() {

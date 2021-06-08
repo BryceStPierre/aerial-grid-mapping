@@ -3,8 +3,6 @@ import { graphicTypes } from "../config/constants";
 
 /** Class representing a line on the Cartesian plane. */
 export default class Line {
-  static type = graphicTypes.LINE;
-
   /**
    * @param {(number|Point)} a The slope, or a point.
    * @param {(number|Point)} b The y-intercept, or a point.
@@ -33,6 +31,7 @@ export default class Line {
       this._slope = -500; // Vertical.
 
     this._classNames = [];
+    this._type = graphicTypes.LINE;
   }
 
   /**
@@ -116,5 +115,9 @@ export default class Line {
 
   get classNames() {
     return this._classNames.join(" ");
+  }
+  
+  get type() {
+    return this._type;
   }
 }

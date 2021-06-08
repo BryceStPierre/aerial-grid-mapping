@@ -28,7 +28,6 @@ export default class GraphicsManager {
 
   /**
    * @param {object} graphic
-   * @param {number} graphicType
    */
   addGraphic(graphic) {
     this._graphics.push(graphic);

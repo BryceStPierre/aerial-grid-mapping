@@ -6,17 +6,16 @@ import { graphicTypes } from "../config/constants";
 
 /** Class representing a grid on the Cartesian plane. */
 export default class Grid {
-  static type = graphicTypes.GRID;
-
   /**
    * @param {number} graphWidth
    * @param {number} graphHeight
    * @param {number} unitSize
-   * @param {Line} initialLine
+   * @param {Line} line1
    */
   constructor(graphWidth, graphHeight, unitSize, line1) {
     this._bounds = new Rectangle(graphWidth, graphHeight);
     this._unitSize = unitSize;
+    this._type = graphicTypes.GRID;
 
     const u = unitSize * Math.sqrt(Math.pow(line1.slope, 2) + 1);
 
@@ -166,5 +165,9 @@ export default class Grid {
         return unit;
       })
     }
+  }
+
+  get type() {
+    return this._type;
   }
 }

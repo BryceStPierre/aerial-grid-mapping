@@ -2,23 +2,29 @@ import { graphicTypes } from "../config/constants";
 
 /** Class representing a point on the Cartesian plane. */
 export default class Point {
-  static type = graphicTypes.POINT;
-
   /**
-   * @param {number} x 
-   * @param {number} y 
+   * @param {number} x
+   * @param {number} y
    */
   constructor(x = 0, y = 0) {
     this._x = x;
     this._y = y;
     this._classNames = [];
+    this._type = graphicTypes.POINT;
   }
 
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
   add(x, y) {
     this._x += x;
     this._y += y;
   }
 
+  /**
+   * @param {number} c
+   */
   multiply(c) {
     this._x *= c;
     this._y *= c;
@@ -44,19 +50,19 @@ export default class Point {
   }
 
   /**
-   * @param {number} graphHeight 
+   * @param {number} graphHeight
    * @returns {JSON}
    */
   asGraphic(graphHeight) {
     return {
       x: this._x,
       y: graphHeight - this._y,
-      classNames: this._classNames.join(" ")
+      classNames: this._classNames.join(" "),
     };
   }
 
   /**
-   * @param {string} className 
+   * @param {string} className
    */
   addClassName(className) {
     this._classNames.push(className);
@@ -78,5 +84,9 @@ export default class Point {
 
   get classNames() {
     return this._classNames.join(" ");
+  }
+
+  get type() {
+    return this._type;
   }
 }
