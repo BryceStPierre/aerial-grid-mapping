@@ -40,7 +40,7 @@ export default class Line {
    */
   solveWithX(x) {
     // Recall, y = mx + b.
-    return this._slope * x + b;
+    return this._slope * x + this._yIntercept;
   }
 
   /**

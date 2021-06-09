@@ -84,11 +84,12 @@ export const addStepThreeGraphics = (width, height, svgSelector) => {
   });
 
   let manager = new GraphicsManager(width, height, svgSelector);
-  // let grid = new Grid(
-  //   width,
-  //   height,
-  //   20,
-  //   new Line(averageSlope, pointWithMinimumX)
-  // );
-  // manager.addGraphic(grid);
+  let grid = new Grid(
+    width,
+    height,
+    20,
+    new Line(averageSlope, pointWithMinimumX)
+  );
+  grid.setConstraint(constraint);
+  manager.addGraphic(grid);
 };

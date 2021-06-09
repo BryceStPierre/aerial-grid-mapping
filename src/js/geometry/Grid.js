@@ -14,6 +14,7 @@ export default class Grid {
    */
   constructor(graphWidth, graphHeight, unitSize, line1) {
     this._bounds = new Rectangle(graphWidth, graphHeight);
+    this._units = [];
     this._unitSize = unitSize;
     this._type = graphicTypes.GRID;
 
@@ -65,9 +66,6 @@ export default class Grid {
       this._negativeSet.push(new Line(line3.slope, nextYIntercept));
       nextYIntercept += v;
     }
-
-    // Uncomment to use this class without a constraint.
-    // this.setConstraint(this._bounds.asPolygon());
   }
 
   /**
@@ -112,7 +110,7 @@ export default class Grid {
   /**
    * @returns {JSON} 
    */
-   selectedPortion() {
+   getSelectedPortion() {
     let selectedUnits = this._units.filter(u => u.selected);
     let rowNumbers = selectedUnits.map(u => u.row);
     let columnNumbers = selectedUnits.map(u => u.column);

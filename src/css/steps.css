@@ -61,3 +61,15 @@ rect.overlay {
 rect.dark {
   fill: rgba(0,0,0,0.8);
 }
+
+.grid g.lines line {
+  stroke: rgba(0, 0, 0, 0.8);
+}
+
+.grid g.units polygon {
+  fill: transparent;
+}
+
+.grid g.units polygon:hover {
+  fill: rgba(102, 51, 153, 0.5);
+}

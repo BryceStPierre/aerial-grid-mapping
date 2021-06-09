@@ -19,6 +19,10 @@ input, button {
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 img {
   max-width: 100%;
 }

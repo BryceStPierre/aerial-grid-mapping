@@ -40,6 +40,7 @@ export const createRectangle = (rectangle) => {
 
 /**
  * @param {JSON} polygon
+ * @param {boolean} editable
  * @returns {SVGElement}
  */
 export const createPolygon = (polygon, editable = false) => {
@@ -120,6 +121,6 @@ export const createGrid = (grid) => {
     .forEach((unit) => unitGroup.append(unit));
 
   gridGroup.append(lineGroup);
-  gripGroup.append(unitGroup);
+  gridGroup.append(unitGroup);
   return gridGroup;
 };
