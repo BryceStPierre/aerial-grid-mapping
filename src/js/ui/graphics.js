@@ -6,7 +6,12 @@ import Polygon from "../geometry/Polygon";
 import Rectangle from "../geometry/Rectangle";
 import Grid from "../geometry/Grid";
 import GraphicsManager from "../utils/GraphicsManager";
-import { createPolygon, createMask, createRectangle } from "../utils/svg";
+import {
+  createPolygon,
+  createGroup,
+  createMask,
+  createRectangle,
+} from "../utils/svg";
 import { store, retrieve } from "../utils/localStorage";
 
 /**
@@ -54,14 +59,18 @@ export const addStepThreeGraphics = (width, height, svgSelector) => {
   let mask = createMask("overlayMask");
   mask.append(maskRect);
   mask.append(maskPolygon);
-  $(svgSelector).append(mask);
+  let maskGroup = createGroup();
+  $(maskGroup).append(mask);
 
   // Add overlay to highlight mask.
   let overlay = new Rectangle(width, height);
   overlay.addClassName("dark");
   overlay = createRectangle(overlay.asGraphic(height));
   overlay.attr("mask", "url(#overlayMask)");
-  $(svgSelector).append(overlay);
+  $(maskGroup).append(overlay);
+
+  let manager = new GraphicsManager(width, height, svgSelector);
+  manager.addGraphic(maskGroup);
 
   // Compute slope for the initial line used for the grid.
   const slopes = constraint.segments
@@ -75,19 +84,15 @@ export const addStepThreeGraphics = (width, height, svgSelector) => {
     });
   const averageSlope = slopes.reduce((a, c) => a + c) / slopes.length;
 
-  let pointWithMinimumX = new Point(
-    constraint.points[0].x + (Math.random() > 0.5 ? 0.001 : -0.001),
-    constraint.points[0].y
-  );
-  constraint.points.forEach((p) => {
-    if (p.x < pointWithMinimumX.x) pointWithMinimumX = p;
+  let pointWithMinimumX = constraint.points[0];
+  constraint.points.forEach((point) => {
+    if (point.x < pointWithMinimumX.x) pointWithMinimumX = point;
   });
 
-  let manager = new GraphicsManager(width, height, svgSelector);
   let grid = new Grid(
     width,
     height,
-    20,
+    30,
     new Line(averageSlope, pointWithMinimumX)
   );
   grid.setConstraint(constraint);

@@ -49,9 +49,9 @@ export default class Grid {
       nextYIntercept += u;
     }
 
-    let negativeLowerLimit = new Line(line1.slope, new Point(0, 0));
+    let negativeLowerLimit = new Line(line3.slope, new Point(0, 0));
     let negativeUpperLimit = new Line(
-      line1.slope,
+      line3.slope,
       new Point(graphWidth, graphHeight)
     );
 
@@ -69,7 +69,7 @@ export default class Grid {
   }
 
   /**
-   * @param {Polygon} constraint 
+   * @param {Polygon} constraint
    */
   setConstraint(constraint) {
     this._units = [];
@@ -80,7 +80,7 @@ export default class Grid {
           this._positiveSet[i].pointOfIntersectionWith(this._negativeSet[j]),
           this._positiveSet[i + 1].pointOfIntersectionWith(this._negativeSet[j]),
           this._positiveSet[i + 1].pointOfIntersectionWith(this._negativeSet[j + 1]),
-          this._positiveSet[i].pointOfIntersectionWith(this._negativeSet[j + 1])
+          this._positiveSet[i].pointOfIntersectionWith(this._negativeSet[j + 1]),
         ]);
 
         if (this._bounds.containsPolygon(unit) && constraint.containsPolygon(unit)) {
@@ -88,33 +88,35 @@ export default class Grid {
             row: i,
             column: j,
             polygon: unit,
-            selected: false
+            selected: false,
           });
         }
       }
     }
   }
-  
+
   /**
-   * @param {number} row 
-   * @param {number} column 
-   * @returns {boolean} 
+   * @param {number} row
+   * @param {number} column
+   * @returns {boolean}
    */
   toggleSelected(row, column) {
-    let index = this._units.findIndex(u => u.row === row && u.column === column);
+    let index = this._units.findIndex(
+      (u) => u.row === row && u.column === column
+    );
     let newState = !this._units[index].selected;
     this._units[index].selected = newState;
     return newState;
   }
 
   /**
-   * @returns {JSON} 
+   * @returns {JSON}
    */
-   getSelectedPortion() {
-    let selectedUnits = this._units.filter(u => u.selected);
-    let rowNumbers = selectedUnits.map(u => u.row);
-    let columnNumbers = selectedUnits.map(u => u.column);
-    
+  getSelectedPortion() {
+    let selectedUnits = this._units.filter((u) => u.selected);
+    let rowNumbers = selectedUnits.map((u) => u.row);
+    let columnNumbers = selectedUnits.map((u) => u.column);
+
     let minRow = Math.min(...rowNumbers);
     let maxRow = Math.max(...rowNumbers);
     let minColumn = Math.min(...columnNumbers);
@@ -124,7 +126,7 @@ export default class Grid {
     for (let i = minRow; i <= maxRow; i++) {
       let row = [];
       for (let j = minColumn; j <= maxColumn; j++) {
-        let unit = selectedUnits.find(u => u.row === i && u.column === j);
+        let unit = selectedUnits.find((u) => u.row === i && u.column === j);
         row.push(unit ? 1 : 0);
       }
       bitmap.push(row);
@@ -133,36 +135,35 @@ export default class Grid {
     return {
       selectionWidth: maxColumn - minColumn,
       selectionHeight: maxRow - minRow,
-      bitmap
+      bitmap,
     };
   }
 
   /**
-   * @param {number} graphHeight 
+   * @param {number} graphHeight
    * @returns {JSON}
    */
   asGraphic(graphHeight) {
     return {
-      "lines": this._positiveSet.concat(this._negativeSet).map(l => {
+      lines: this._positiveSet.concat(this._negativeSet).map((l) => {
         let points = [
           l.pointAtX(0),
           l.pointAtX(this._bounds.width),
           l.pointAtY(0),
-          l.pointAtY(this._bounds.height)
+          l.pointAtY(this._bounds.height),
         ];
         let xValues = points
-          .filter(p => this._bounds.containsPoint(p))
-          .map(p => p.x);
+          .filter((p) => this._bounds.containsPoint(p))
+          .map((p) => p.x);
         return l.asGraphic(xValues[0], xValues[1], this._bounds.height);
       }),
-      "units": this._units.map(u => {
+      units: this._units.map((u) => {
         let unit = u;
-        if (u.selected)
-          unit.polygon.addClassName("selected");
+        if (unit.selected) unit.polygon.addClassName("selected");
         unit.polygon = unit.polygon.asGraphic(graphHeight);
         return unit;
-      })
-    }
+      }),
+    };
   }
 
   get type() {

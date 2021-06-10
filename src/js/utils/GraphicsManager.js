@@ -73,10 +73,9 @@ export default class GraphicsManager {
   };
 
   /**
-   * 
-   * @param {number} graphicIndex 
-   * @param {number} row 
-   * @param {number} column 
+   * @param {number} graphicIndex
+   * @param {number} row
+   * @param {number} column
    */
   handleClickGridUnit = (graphicIndex, row, column) => {
     let isSelected = this._graphics[graphicIndex].toggleSelected(row, column);
@@ -92,7 +91,7 @@ export default class GraphicsManager {
     $(this._svgSelector).html("");
 
     this._graphics.forEach((g, i) => {
-      let svgElement;
+      let svgElement = g;
       if (g.type === graphicTypes.POINT) {
         svgElement = createPoint(g.asGraphic(this._height));
       } else if (g.type === graphicTypes.LINE) {
@@ -106,15 +105,19 @@ export default class GraphicsManager {
         });
       } else if (g.type === graphicTypes.GRID) {
         svgElement = createGrid(g.asGraphic(this._height));
-        svgElement.children(".units polygon").each((index, element) => {
-          $(element).on("click", () => {
-            this.handleClickGridUnit(
-              i,
-              $(element).data("row"),
-              $(element).data("column")
-            );
+        svgElement
+          .children("g.units")
+          .children("polygon")
+          .each((index, element) => {
+            $(element).on("click", () => {
+              console.log($(element).data("row"), $(element).data("column"));
+              this.handleClickGridUnit(
+                i,
+                $(element).data("row"),
+                $(element).data("column")
+              );
+            });
           });
-        });
       }
       $(this._svgSelector).append(svgElement);
     });

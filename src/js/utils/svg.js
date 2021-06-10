@@ -55,9 +55,7 @@ export const createPolygon = (polygon, editable = false) => {
     return polygonElement;
   }
 
-  let polygonGroup = $(
-    document.createElementNS("http://www.w3.org/2000/svg", "g")
-  ).attr("class", "polygon-container");
+  let polygonGroup = createGroup().attr("class", "polygon-container");
 
   polygonGroup.append(polygonElement);
   polygon.pointArray.forEach((p) => {
@@ -74,6 +72,13 @@ export const createPolygon = (polygon, editable = false) => {
   polygonGroup.addClass(polygon.classNames);
 
   return polygonGroup;
+};
+
+/**
+ * @returns {SVGElement}
+ */
+ export const createGroup = () => {
+  return $(document.createElementNS("http://www.w3.org/2000/svg", "g"));
 };
 
 /**
@@ -102,20 +107,14 @@ export const createGridUnit = (gridUnit) => {
  * @returns {SVGElement}
  */
 export const createGrid = (grid) => {
-  let gridGroup = $(
-    document.createElementNS("http://www.w3.org/2000/svg", "g")
-  ).attr("class", "grid");
+  let gridGroup = createGroup().attr("class", "grid");
 
-  let lineGroup = $(
-    document.createElementNS("http://www.w3.org/2000/svg", "g")
-  ).attr("class", "lines");
+  let lineGroup = createGroup().attr("class", "lines");
   grid.lines
     .map((line) => createLine(line))
     .forEach((line) => lineGroup.append(line));
 
-  let unitGroup = $(
-    document.createElementNS("http://www.w3.org/2000/svg", "g")
-  ).attr("class", "units");
+  let unitGroup = createGroup().attr("class", "units");
   grid.units
     .map((unit) => createGridUnit(unit))
     .forEach((unit) => unitGroup.append(unit));
