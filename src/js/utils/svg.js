@@ -97,7 +97,7 @@ export const createMask = (maskId) => {
 export const createGridUnit = (gridUnit) => {
   return $(document.createElementNS("http://www.w3.org/2000/svg", "polygon"))
     .attr("points", gridUnit.polygon.pointString)
-    .attr("class", `polygon ${gridUnit.polygon.classNames}`)
+    .attr("class", `polygon ${gridUnit.polygon.classNames} ${gridUnit.selected ? " selected" : ""}`)
     .attr("data-row", gridUnit.row)
     .attr("data-column", gridUnit.column);
 };

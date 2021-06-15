@@ -69,6 +69,7 @@ rect.dark {
 .grid g.units polygon {
   fill: transparent;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .grid g.units polygon:hover {

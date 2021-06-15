@@ -140,10 +140,9 @@ export default class Grid {
   }
 
   /**
-   * @param {number} graphHeight
    * @returns {JSON}
    */
-  asGraphic(graphHeight) {
+  asGraphic() {
     return {
       lines: this._positiveSet.concat(this._negativeSet).map((l) => {
         let points = [
@@ -158,9 +157,8 @@ export default class Grid {
         return l.asGraphic(xValues[0], xValues[1], this._bounds.height);
       }),
       units: this._units.map((u) => {
-        let unit = u;
-        if (unit.selected) unit.polygon.addClassName("selected");
-        unit.polygon = unit.polygon.asGraphic(graphHeight);
+        let unit = Object.assign({}, u);
+        unit.polygon = unit.polygon.asGraphic(this._bounds.height);
         return unit;
       }),
     };

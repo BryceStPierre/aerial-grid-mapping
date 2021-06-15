@@ -84,6 +84,7 @@ export const addStepThreeGraphics = (width, height, svgSelector) => {
     });
   const averageSlope = slopes.reduce((a, c) => a + c) / slopes.length;
 
+  // Compute point for the initial line used for the grid.
   let pointWithMinimumX = constraint.points[0];
   constraint.points.forEach((point) => {
     if (point.x < pointWithMinimumX.x) pointWithMinimumX = point;

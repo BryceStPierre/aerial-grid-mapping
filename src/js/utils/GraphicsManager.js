@@ -104,13 +104,12 @@ export default class GraphicsManager {
           $(element).on("mousedown", () => this.handleMouseDown(i, index));
         });
       } else if (g.type === graphicTypes.GRID) {
-        svgElement = createGrid(g.asGraphic(this._height));
+        svgElement = createGrid(g.asGraphic());
         svgElement
           .children("g.units")
           .children("polygon")
           .each((index, element) => {
             $(element).on("click", () => {
-              console.log($(element).data("row"), $(element).data("column"));
               this.handleClickGridUnit(
                 i,
                 $(element).data("row"),
