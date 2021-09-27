@@ -1,5 +1,5 @@
-import selectAudio from "../../audio/select.wav";
-import deselectAudio from "../../audio/deselect.wav";
+import selectAudio from "../../assets/audio/select.wav";
+import deselectAudio from "../../assets/audio/deselect.wav";
 
 export const playSelectAudio = () => {
   let audio = new Audio(selectAudio);
