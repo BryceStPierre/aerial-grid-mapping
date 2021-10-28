@@ -1,6 +1,6 @@
 # Aerial Grid Mapping
 
-A side project using the Google Maps API and geometry to do grid mapping on satellite images of a location. I developed this app back in late 2016/early 2017, including the method for generating the grid.
+A side project that leverages Google Maps APIs and geometry to do grid mapping over top of satellite images. I worked on an earlier version of this web app back in late 2016, including the method for generating the grid.
 
 ## Getting Started
 
@@ -16,6 +16,10 @@ Run `npm run dev` to run the project using webpack-dev-server.
 
 Run `npm run build` to compile and generate build files in `./dist`.
 
+## Guide
+
+Details coming soon...
+
 ## Demo
 
-The project is not live—as to not incur usage charges—however a [pre-recorded demo of the app is available](https://brycestpierre.github.io/aerial-grid-mapping/).
+Details coming soon...
