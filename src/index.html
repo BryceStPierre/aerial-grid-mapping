@@ -16,18 +16,18 @@
     <img width="640" height="425" id="staticMap" data-api-key="<%= htmlWebpackPlugin.options.apiKey %>">
 
     <!-- Step 1: Find a location. -->
-    <section id="stepOne" class="active">
+    <section id="stepOne" data-step="1" class="active">
       <input type="text" class="controls" id="placeSearch" placeholder="Search a place name or an address...">
       <div id="map"></div>
     </section>
 
     <!-- Step 2: Select a region. -->
-    <section id="stepTwo">
+    <section id="stepTwo" data-step="2">
       <svg xmlns="http://www.w3.org/2000/svg"></svg>
     </section>
 
     <!-- Step 3: Select units in the grid map. -->
-    <section id="stepThree">
+    <section id="stepThree" data-step="3">
       <svg xmlns="http://www.w3.org/2000/svg"></svg>
     </section>
   </main>

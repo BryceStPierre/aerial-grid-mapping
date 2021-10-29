@@ -6,8 +6,8 @@ export const graphicTypes = {
   GRID: 4,
 };
 
-export const strings = {
-  stepOne: "Find a location.",
-  stepTwo: "Select a region.",
-  stepThree: "Select units in the grid map.",
-};
+export const strings = [
+  "Find a location.",
+  "Select a region.",
+  "Select units in the grid map.",
+];
