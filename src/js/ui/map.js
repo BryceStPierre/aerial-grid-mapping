@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 export const addBasicMap = (center) => {
   let mapOptions = {
     center,
@@ -66,7 +64,7 @@ export const addBasicMap = (center) => {
 
 export const addStaticMap = (width, height, center, zoom) => {
   const parameters = [
-    `key=${$("#staticMap").data("api-key")}`,
+    `key=${document.querySelector("#staticMap").dataset.apiKey}`,
     'maptype=satellite',
     'scale=2',
     `zoom=${zoom}`,
@@ -76,9 +74,8 @@ export const addStaticMap = (width, height, center, zoom) => {
 
   const url = `https://maps.googleapis.com/maps/api/staticmap?${parameters.join("&")}`;
 
-  $("#staticMap")
-    .attr("src", url)
-    .attr("width", width)
-    .attr("height", height)
-    .attr("alt", "Static Map");
+  document.querySelector("#staticMap").setAttribute("src", url);
+  document.querySelector("#staticMap").setAttribute("width", width);
+  document.querySelector("#staticMap").setAttribute("height", height);
+  document.querySelector("#staticMap").setAttribute("alt", "Static Map");
 }

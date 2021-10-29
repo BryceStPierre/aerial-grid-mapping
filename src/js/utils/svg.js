@@ -5,11 +5,12 @@ import $ from "jquery";
  * @returns {SVGElement}
  */
 export const createPoint = (point) => {
-  return $(document.createElementNS("http://www.w3.org/2000/svg", "circle"))
-    .attr("class", `point ${point.classNames}`)
-    .attr("r", 5)
-    .attr("cx", point.x)
-    .attr("cy", point.y);
+  let element = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  element.setAttribute("class", `point ${point.classNames}`);
+  element.setAttribute("r", 5);
+  element.setAttribute("cx", point.x);
+  element.setAttribute("cy", point.y);
+  return $(element);
 };
 
 /**
@@ -17,12 +18,13 @@ export const createPoint = (point) => {
  * @returns {SVGElement}
  */
 export const createLine = (line) => {
-  return $(document.createElementNS("http://www.w3.org/2000/svg", "line"))
-    .attr("class", `line ${line.classNames}`)
-    .attr("x1", line.start.x)
-    .attr("y1", line.start.y)
-    .attr("x2", line.finish.x)
-    .attr("y2", line.finish.y);
+  let element = document.createElementNS("http://www.w3.org/2000/svg", "line");
+  element.setAttribute("class", `line ${line.classNames}`);
+  element.setAttribute("x1", line.start.x);
+  element.setAttribute("y1", line.start.y);
+  element.setAttribute("x2", line.finish.x);
+  element.setAttribute("y2", line.finish.y);
+  return $(element);
 };
 
 /**
@@ -30,12 +32,13 @@ export const createLine = (line) => {
  * @returns {SVGElement}
  */
 export const createRectangle = (rectangle) => {
-  return $(document.createElementNS("http://www.w3.org/2000/svg", "rect"))
-    .attr("class", `rectangle ${rectangle.classNames}`)
-    .attr("x", rectangle.origin.x)
-    .attr("y", rectangle.origin.y)
-    .attr("width", rectangle.width)
-    .attr("height", rectangle.height);
+  let element = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+  element.setAttribute("class", `rectangle ${rectangle.classNames}`);
+  element.setAttribute("x", rectangle.origin.x);
+  element.setAttribute("y", rectangle.origin.y);
+  element.setAttribute("width", rectangle.width);
+  element.setAttribute("height", rectangle.height);
+  return $(element);
 };
 
 /**
