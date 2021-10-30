@@ -15,8 +15,8 @@ export default class Polygon {
   }
 
   /**
-   * @param {number} x 
-   * @param {number} y 
+   * @param {number} x
+   * @param {number} y
    */
   translate(x, y) {
     this._points = this._points.map((p) => p.add(x, y));
@@ -24,7 +24,7 @@ export default class Polygon {
   }
 
   /**
-   * @param {number} c 
+   * @param {number} c
    */
   scale(c) {
     this._points = this._points.map((p) => p.multiply(c));
@@ -32,9 +32,9 @@ export default class Polygon {
   }
 
   /**
-   * @param {number} index 
-   * @param {number} x 
-   * @param {number} y 
+   * @param {number} index
+   * @param {number} x
+   * @param {number} y
    */
   translatePoint(index, x, y) {
     this._points[index].x = x;
@@ -86,12 +86,12 @@ export default class Polygon {
     return {
       pointArray: points,
       pointString: points.map((p) => `${p.x},${p.y}`).join(" "),
-      classNames: this._classNames.join(" ")
+      classNames: this._classNames,
     };
   }
 
   /**
-   * @param {string} className 
+   * @param {string} className
    */
   addClassName(className) {
     this._classNames.push(className);
@@ -115,7 +115,7 @@ export default class Polygon {
   }
 
   get classNames() {
-    return this._classNames.join(" ");
+    return this._classNames;
   }
 
   get type() {

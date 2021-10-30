@@ -9,7 +9,6 @@ export default class Point {
   constructor(x = 0, y = 0) {
     this._x = x;
     this._y = y;
-    this._classNames = [];
     this._type = graphicTypes.POINT;
   }
 
@@ -57,15 +56,7 @@ export default class Point {
     return {
       x: this._x,
       y: graphHeight - this._y,
-      classNames: this._classNames.join(" "),
     };
-  }
-
-  /**
-   * @param {string} className
-   */
-  addClassName(className) {
-    this._classNames.push(className);
   }
 
   get x() {
@@ -80,10 +71,6 @@ export default class Point {
   }
   set y(y) {
     this._y = y;
-  }
-
-  get classNames() {
-    return this._classNames.join(" ");
   }
 
   get type() {

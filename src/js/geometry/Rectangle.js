@@ -4,8 +4,8 @@ import { graphicTypes } from "../config/constants";
 /** Class representing a rectangle on the Cartesian plane. */
 export default class Rectangle {
   /**
-   * @param {number} width 
-   * @param {number} height 
+   * @param {number} width
+   * @param {number} height
    */
   constructor(width, height) {
     this._width = width;
@@ -55,7 +55,7 @@ export default class Rectangle {
       width: this._width,
       height: this._height,
       origin: this._origin.asGraphic(graphHeight),
-      classNames: this._classNames.join(" ")
+      classNames: this._classNames,
     };
   }
 
@@ -79,7 +79,7 @@ export default class Rectangle {
   }
 
   get classNames() {
-    return this._classNames.join(" ");
+    return this._classNames;
   }
 
   get type() {
