@@ -1,4 +1,4 @@
-import $ from "jquery";
+// import $ from "jquery";
 
 import Point from "../geometry/Point";
 import Line from "../geometry/Line";
@@ -47,27 +47,32 @@ export const addStepTwoGraphics = (width, height, svgSelector) => {
 export const addStepThreeGraphics = (width, height, svgSelector) => {
   let maskRect = new Rectangle(width, height);
   maskRect = createRectangle(maskRect.asGraphic(height));
-  maskRect.attr("fill", "#fff");
+  maskRect.setAttribute("fill", "#fff");
+  // maskRect.attr("fill", "#fff");
 
   let constraint = new Polygon(
     retrieve("constraint")._points.map((p) => new Point(p._x, p._y))
   );
   let maskPolygon = createPolygon(constraint.asGraphic(height), false);
-  maskPolygon.attr("fill", "#000");
+  // maskPolygon.attr("fill", "#000");
+  maskPolygon.setAttribute("fill", "#000");
 
   // Add mask to trace constraint polygon.
   let mask = createMask("overlayMask");
   mask.append(maskRect);
   mask.append(maskPolygon);
   let maskGroup = createGroup();
-  $(maskGroup).append(mask);
+  maskGroup.append(mask);
+  // $(maskGroup).append(mask);
 
   // Add overlay to highlight mask.
   let overlay = new Rectangle(width, height);
   overlay.addClassName("dark");
   overlay = createRectangle(overlay.asGraphic(height));
-  overlay.attr("mask", "url(#overlayMask)");
-  $(maskGroup).append(overlay);
+  overlay.setAttribute("mask", "url(#overlayMask)");
+  // overlay.attr("mask", "url(#overlayMask)");
+  // $(maskGroup).append(overlay);
+  maskGroup.append(overlay);
 
   let manager = new GraphicsManager(width, height, svgSelector);
   manager.addGraphic(maskGroup);

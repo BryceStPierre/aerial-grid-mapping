@@ -1,4 +1,4 @@
-import $ from "jquery";
+// import $ from "jquery";
 import {
   createPoint,
   createLine,
@@ -22,8 +22,10 @@ export default class GraphicsManager {
     this._svgSelector = svgSelector;
     this._graphics = [];
 
-    $(this._svgSelector).on("mousemove", this.handleMouseMove);
-    $(this._svgSelector).on("mouseup", this.handleMouseUp);
+    document.querySelector(this._svgSelector).addEventListener("mousemove", this.handleMouseMove);
+    document.querySelector(this._svgSelector).addEventListener("mouseup", this.handleMouseUp)
+    // $(this._svgSelector).on("mousemove", this.handleMouseMove);
+    // $(this._svgSelector).on("mouseup", this.handleMouseUp);
   }
 
   /**
@@ -88,7 +90,8 @@ export default class GraphicsManager {
    * Clear graphics and display them in their current state.
    */
   render() {
-    $(this._svgSelector).html("");
+    document.querySelector(this._svgSelector).innerHTML = "";
+    // $(this._svgSelector).html("");
 
     this._graphics.forEach((g, i) => {
       let svgElement = g;
@@ -100,25 +103,48 @@ export default class GraphicsManager {
         svgElement = createRectangle(g.asGraphic(this._height));
       } else if (g.type === graphicTypes.POLYGON) {
         svgElement = createPolygon(g.asGraphic(this._height), true);
-        svgElement.children(".vertex").each((index, element) => {
-          $(element).on("mousedown", () => this.handleMouseDown(i, index));
-        });
+        Array.from(svgElement.children)
+          .filter(e => e.classList.contains("vertex"))
+          .forEach((element, index) => {
+            element.addEventListener("mousedown", () => this.handleMouseDown(i, index));
+          });
+        // svgElement.children(".vertex").each((index, element) => {
+        //   $(element).on("mousedown", () => this.handleMouseDown(i, index));
+        // });
       } else if (g.type === graphicTypes.GRID) {
         svgElement = createGrid(g.asGraphic());
-        svgElement
-          .children("g.units")
-          .children("polygon")
-          .each((index, element) => {
-            $(element).on("click", () => {
-              this.handleClickGridUnit(
-                i,
-                $(element).data("row"),
-                $(element).data("column")
-              );
-            });
+        Array.from(svgElement.children)
+          .filter((e) => e.classList.contains("units"))
+          .forEach((e) => {
+            Array.from(e.children)
+              .filter(e => e.tagName === 'polygon')
+              .forEach((element) => {
+                element.addEventListener("click", () => {
+                  console.log('element', element);
+                  console.log('element dataset', element.dataset);
+                  this.handleClickGridUnit(
+                    i,
+                    Number(element.dataset.row),
+                    Number(element.dataset.column)
+                  );
+                });
+              });
           });
+        // svgElement
+        //   .children("g.units")
+        //   .children("polygon")
+        //   .each((index, element) => {
+        //     $(element).on("click", () => {
+        //       this.handleClickGridUnit(
+        //         i,
+        //         $(element).data("row"),
+        //         $(element).data("column")
+        //       );
+        //     });
+        //   });
       }
-      $(this._svgSelector).append(svgElement);
+      document.querySelector(this._svgSelector).append(svgElement);
+      // $(this._svgSelector).append(svgElement);
     });
   }
 }

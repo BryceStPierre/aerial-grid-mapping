@@ -16,3 +16,7 @@ export const initialLocation = {
   lat: 43.665,
   lng: -79.402,
 };
+
+export const dimensions = {
+  vertexRadius: 15,
+};
