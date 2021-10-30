@@ -11,11 +11,12 @@ import { addBasicMap, addStaticMap } from "./ui/map";
 import { establishScale } from "./utils/geography";
 import { addStepTwoGraphics, addStepThreeGraphics } from "./ui/graphics";
 import { retrieve, store } from "./utils/localStorage";
+import { initialLocation } from "./config/constants";
 
 document.addEventListener("DOMContentLoaded", () => {
   let map = addBasicMap({
-    lat: 43.665,
-    lng: -79.402,
+    lat: initialLocation.lat,
+    lng: initialLocation.lng,
   });
 
   document
@@ -23,10 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", handleBackNavigation);
 
   document.querySelector("#next").addEventListener("click", () => {
-    // Initialize step two.
+    // If on step one, initialize step two.
     if (onStep(1)) {
-      const width = document.querySelector("#map").offsetWidth;
-      const height = document.querySelector("#map").offsetHeight;
+      let mapElement = document.querySelector("#map");
+      const width = mapElement.offsetWidth;
+      const height = mapElement.offsetHeight;
       store("width", width);
       store("height", height);
 
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       addStepTwoGraphics(width, height, "#stepTwo svg");
     }
-    // Initialize step three.
+    // If on step two, initialize step three.
     else if (onStep(2)) {
       const width = retrieve("width");
       const height = retrieve("height");

@@ -13,7 +13,7 @@
   </header>
 
   <main>
-    <img width="640" height="425" id="staticMap" data-api-key="<%= htmlWebpackPlugin.options.apiKey %>">
+    <img id="staticMap" width="640" height="425" data-api-key="<%= htmlWebpackPlugin.options.apiKey %>">
 
     <!-- Step 1: Find a location. -->
     <section id="stepOne" data-step="1" class="active">
@@ -47,7 +47,10 @@
     </p>
   </footer>
 
+  <!-- Load Google Web Fonts asynchronously. -->
   <script>WebFontConfig={google:{families:["Inter:400,700"]}},function(){var e=document.createElement("script");e.src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js",e.async="true";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}();</script>
+  
+  <!-- Load Google Maps APIs. -->
   <script
     src="https://maps.googleapis.com/maps/api/js?key=<%= htmlWebpackPlugin.options.apiKey %>&libraries=places"></script>
 </body>

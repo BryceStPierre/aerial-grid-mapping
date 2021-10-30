@@ -11,3 +11,8 @@ export const strings = [
   "Select a region.",
   "Select units in the grid map.",
 ];
+
+export const initialLocation = {
+  lat: 43.665,
+  lng: -79.402,
+};

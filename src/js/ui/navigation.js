@@ -7,6 +7,10 @@ export const handleBackNavigation = () => navigate(-1);
 
 export const handleNextNavigation = () => navigate(1);
 
+/**
+ * Navigate through the app by managing the buttons and sections.
+ * @param {number} stepChange
+ */
 const navigate = (stepChange) => {
   const currentStep = document.querySelector("section.active").dataset.step;
   const numberOfSteps = document.querySelectorAll("section").length;
