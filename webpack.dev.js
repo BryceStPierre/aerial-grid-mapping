@@ -1,4 +1,4 @@
-const commonConfig = require("./webpack.config.common");
+const commonConfig = require("./webpack.common");
 const { merge } = require("webpack-merge");
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
     compress: true,
     https: true,
   },
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
   module: {
     rules: [
       {

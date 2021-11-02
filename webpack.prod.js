@@ -1,12 +1,14 @@
-const commonConfig = require("./webpack.config.common");
+const commonConfig = require("./webpack.common");
 const { merge } = require("webpack-merge");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const HTMLInlineCSSWebpackPlugin =
   require("html-inline-css-webpack-plugin").default;
 
 const config = {
   mode: "production",
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -24,7 +26,8 @@ const config = {
   ],
   optimization: {
     minimizer: [
-      new CssMinimizerPlugin(),
+      new TerserPlugin(),
+      new CssMinimizerPlugin()
     ],
   },
 };
