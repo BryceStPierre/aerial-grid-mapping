@@ -12,6 +12,8 @@ import {
 } from "../utils/svg";
 import { store, retrieve } from "../utils/localStorage";
 
+import { dimensions } from "../config/constants";
+
 /**
  * @param {number} width
  * @param {number} height
@@ -91,7 +93,7 @@ export const addStepThreeGraphics = (width, height, svgSelector) => {
   let grid = new Grid(
     width,
     height,
-    30,
+    dimensions.defaultGridUnitSize,
     new Line(averageSlope, pointWithMinimumX)
   );
   grid.setConstraint(constraint);

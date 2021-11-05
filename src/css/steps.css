@@ -37,7 +37,7 @@ svg {
 }
 
 rect.overlay {
-  fill: rgba(0, 0, 0, 0.55);
+  fill: rgb(0 0 0 / 0.55);
 }
 
 .constraint .polygon,
@@ -46,7 +46,7 @@ rect.overlay {
 }
 
 .constraint .polygon {
-  fill: rgba(255, 255, 255, 0.3);
+  fill: rgb(255 255 255 / 0.3);
 }
 
 .constraint .vertex {
@@ -54,16 +54,16 @@ rect.overlay {
 }
 
 .constraint .vertex:hover {
-  fill: rgba(255, 255, 255, 0.5);
+  fill: rgb(255 255 255 / 0.5);
   cursor: pointer;
 }
 
 rect.dark {
-  fill: rgba(0, 0, 0, 0.8);
+  fill: rgb(0 0 0 / 0.8);
 }
 
 .grid g.lines line {
-  stroke: rgba(0, 0, 0, 0.6);
+  stroke: rgba(0 0 0 / 0.6);
 }
 
 .grid g.units polygon {
@@ -73,9 +73,33 @@ rect.dark {
 }
 
 .grid g.units polygon:hover {
-  fill: rgba(255, 218, 7, 0.4);
+  fill: rgb(255 218 7 / 0.4);
 }
 
 .grid g.units polygon.selected {
-  fill: rgba(255, 218, 7, 0.6);
+  fill: rgb(255 218 7 / 0.6);
+}
+
+.controls {
+  position: absolute;
+  display: flex;
+}
+
+#topLeft {
+  top: 0;
+  left: 0;
+}
+#topRight {
+  top: 0;
+  right: 0;
+}
+
+#gridUnitSize {
+  width: 33%;
+  padding: 0.5rem 0;
+}
+label {
+  color: #fff;
+  padding: 0.5rem 0;
+  margin: 0 0.5rem;
 }
