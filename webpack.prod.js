@@ -8,7 +8,6 @@ const HTMLInlineCSSWebpackPlugin =
 
 const config = {
   mode: "production",
-  devtool: "source-map",
   module: {
     rules: [
       {
@@ -25,10 +24,7 @@ const config = {
     new HTMLInlineCSSWebpackPlugin(),
   ],
   optimization: {
-    minimizer: [
-      new TerserPlugin(),
-      new CssMinimizerPlugin()
-    ],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
 };
 

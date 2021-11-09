@@ -10,8 +10,7 @@ import {
   createMask,
   createRectangle,
 } from "../utils/svg";
-import { store, retrieve } from "../utils/localStorage";
-
+import { retrieve } from "../utils/localStorage";
 import { dimensions } from "../config/constants";
 
 /**
@@ -19,32 +18,7 @@ import { dimensions } from "../config/constants";
  * @param {number} height
  * @param {string} svgSelector
  */
-export const addStepTwoGraphics = (width, height, svgSelector) => {
-  let manager = new GraphicsManager(width, height, svgSelector);
-
-  // Add overlay over top of static map image.
-  let overlay = new Rectangle(width, height);
-  overlay.addClassName("overlay");
-  manager.addGraphic(overlay);
-
-  // Add a parallelogram used for constraining the grid region.
-  let constraint = new Polygon([
-    new Point(0.2 * width, 0.75 * height),
-    new Point(0.6 * width, 0.75 * height),
-    new Point(0.8 * width, 0.25 * height),
-    new Point(0.4 * width, 0.25 * height),
-  ]);
-  constraint.addClassName("constraint");
-  constraint.onUpdate = (polygon) => store("constraint", polygon);
-  manager.addGraphic(constraint);
-};
-
-/**
- * @param {number} width
- * @param {number} height
- * @param {string} svgSelector
- */
-export const addStepThreeGraphics = (width, height, svgSelector) => {
+export const initializeStep3 = (width, height, svgSelector) => {
   let maskRect = new Rectangle(width, height);
   maskRect = createRectangle(maskRect.asGraphic(height));
   maskRect.setAttribute("fill", "#fff");

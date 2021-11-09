@@ -8,8 +8,9 @@ import {
   onStep,
 } from "./ui/navigation";
 import { addBasicMap, addStaticMap } from "./ui/map";
+import { initializeStep2 } from "./ui/step2";
+import { initializeStep3 } from "./ui/step3";
 import { establishScale } from "./utils/geography";
-import { addStepTwoGraphics, addStepThreeGraphics } from "./ui/graphics";
 import { retrieve, store } from "./utils/localStorage";
 import { initialLocation } from "./config/constants";
 
@@ -46,14 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
         map.getBounds().getSouthWest().toJSON()
       );
 
-      addStepTwoGraphics(width, height, "#stepTwo svg");
+      initializeStep2(width, height, "#stepTwo svg");
     }
     // If on step two, initialize step three.
     else if (onStep(2)) {
       const width = retrieve("width");
       const height = retrieve("height");
 
-      addStepThreeGraphics(width, height, "#stepThree svg");
+      initializeStep3(width, height, "#stepThree svg");
     }
 
     handleNextNavigation();

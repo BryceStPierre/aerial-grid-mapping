@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 require("dotenv").config();
@@ -32,5 +33,6 @@ module.exports = {
         removeComments: true,
       },
     }),
+    new FaviconsWebpackPlugin("./src/assets/images/favicon.png"),
   ],
 };
