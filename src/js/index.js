@@ -12,7 +12,7 @@ import { initializeStep2 } from "./ui/step2";
 import { initializeStep3 } from "./ui/step3";
 import { establishScale } from "./utils/geography";
 import { retrieve, store } from "./utils/localStorage";
-import { initialLocation } from "./config/constants";
+import { dimensions, initialLocation } from "./config/constants";
 
 document.addEventListener("DOMContentLoaded", () => {
   let map = addBasicMap({
@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", () => {
         map.getBounds().getNorthEast().toJSON(),
         map.getBounds().getSouthWest().toJSON()
       );
+      store("scale", scale);
+      document.querySelector("#gridSelection span").innerHTML = 
+        (scale * dimensions.gridUnitSize.default).toFixed(2);
 
       initializeStep2(width, height, "#stepTwo svg");
     }
@@ -58,5 +61,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     handleNextNavigation();
+  });
+
+  let gridUnitSizeControl = document.querySelector("#gridUnitSize");
+  gridUnitSizeControl.value = dimensions.gridUnitSize.default;
+  gridUnitSizeControl.setAttribute("min", dimensions.gridUnitSize.min);
+  gridUnitSizeControl.setAttribute("max", dimensions.gridUnitSize.max);
+  gridUnitSizeControl.addEventListener("input", (e) => {
+    const newSize = e.target.value;
+    const width = retrieve("width");
+    const height = retrieve("height");
+    initializeStep3(width, height, "#stepThree svg", newSize);
+
+    const scale = retrieve("scale");
+    document.querySelector("#gridSelection span").innerHTML = 
+      (scale * newSize).toFixed(2);
   });
 });

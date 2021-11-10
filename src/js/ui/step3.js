@@ -18,7 +18,7 @@ import { dimensions } from "../config/constants";
  * @param {number} height
  * @param {string} svgSelector
  */
-export const initializeStep3 = (width, height, svgSelector) => {
+export const initializeStep3 = (width, height, svgSelector, gridUnitSize = dimensions.gridUnitSize.default) => {
   let maskRect = new Rectangle(width, height);
   maskRect = createRectangle(maskRect.asGraphic(height));
   maskRect.setAttribute("fill", "#fff");
@@ -67,7 +67,7 @@ export const initializeStep3 = (width, height, svgSelector) => {
   let grid = new Grid(
     width,
     height,
-    dimensions.defaultGridUnitSize,
+    gridUnitSize,
     new Line(averageSlope, pointWithMinimumX)
   );
   grid.setConstraint(constraint);

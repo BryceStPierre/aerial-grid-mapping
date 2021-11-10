@@ -19,5 +19,9 @@ export const initialLocation = {
 
 export const dimensions = {
   vertexRadius: 18,
-  defaultGridUnitSize: 30
+  gridUnitSize: {
+    min: 20,
+    max: 60,
+    default: 40 
+  }
 };
