@@ -13,6 +13,11 @@ import {
 import { retrieve } from "../utils/localStorage";
 import { dimensions } from "../config/constants";
 
+const handleSelectionUpdate = (selectedPortion) => {
+  // TODO: Use selected portion for something.
+  console.log(selectedPortion);
+};
+
 /**
  * @param {number} width
  * @param {number} height
@@ -70,6 +75,7 @@ export const initializeStep3 = (width, height, svgSelector, gridUnitSize = dimen
     gridUnitSize,
     new Line(averageSlope, pointWithMinimumX)
   );
+  grid.onSelectionUpdate(handleSelectionUpdate);
   grid.setConstraint(constraint);
   manager.addGraphic(grid);
 };

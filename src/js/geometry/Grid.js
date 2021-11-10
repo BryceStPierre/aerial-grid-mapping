@@ -17,6 +17,7 @@ export default class Grid {
     this._units = [];
     this._unitSize = unitSize;
     this._type = graphicTypes.GRID;
+    this._handleSelectionUpdate = () => {};
 
     const u = unitSize * Math.sqrt(Math.pow(line1.slope, 2) + 1);
 
@@ -96,6 +97,13 @@ export default class Grid {
   }
 
   /**
+   * @param {function} handleSelectionUpdate
+   */
+  onSelectionUpdate(handleSelectionUpdate) {
+    this._handleSelectionUpdate = handleSelectionUpdate;
+  }
+
+  /**
    * @param {number} row
    * @param {number} column
    * @returns {boolean}
@@ -106,6 +114,10 @@ export default class Grid {
     );
     let newState = !this._units[index].selected;
     this._units[index].selected = newState;
+
+    // Call update function.
+    this._handleSelectionUpdate(this.getSelectedPortion());
+
     return newState;
   }
 
@@ -133,8 +145,8 @@ export default class Grid {
     }
 
     return {
-      selectionWidth: maxColumn - minColumn,
-      selectionHeight: maxRow - minRow,
+      selectionWidth: maxColumn - minColumn + 1,
+      selectionHeight: maxRow - minRow + 1,
       bitmap,
     };
   }
