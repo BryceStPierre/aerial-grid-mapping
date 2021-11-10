@@ -17,9 +17,12 @@ const haversineFormula = (positionA, positionB) => {
   const dPhi = convertToRadians(positionB.lat - positionA.lat);
   const dLambda = convertToRadians(positionB.lng - positionA.lng);
 
-  let a = Math.sin(dPhi / 2) * Math.sin(dPhi / 2) +
-    Math.cos(phiA) * Math.cos(phiB) * Math.sin(dLambda / 2) *
-    Math.sin(dLambda / 2);
+  let a =
+    Math.sin(dPhi / 2) * Math.sin(dPhi / 2) +
+    Math.cos(phiA) *
+      Math.cos(phiB) *
+      Math.sin(dLambda / 2) *
+      Math.sin(dLambda / 2);
 
   return 2 * 6371e3 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 };

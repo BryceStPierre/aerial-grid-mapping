@@ -73,11 +73,11 @@ rect.dark {
 }
 
 .grid g.units polygon:hover {
-  fill: rgb(255 218 7 / 0.4);
+  fill: rgb(37 201 0 / 0.4);
 }
 
 .grid g.units polygon.selected {
-  fill: rgb(255 218 7 / 0.6);
+  fill: rgb(37 201 0 / 0.6);
 }
 
 .controls {
