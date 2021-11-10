@@ -69,6 +69,29 @@ export default class GraphicsManager {
   };
 
   /**
+   * Handle drag effect, currently only for Polygon objects.
+   * @param {TouchEvent} e
+   */
+  handleTouchMove = (e) => {
+    if (
+      this._isDragging &&
+      this._graphics[this._selectedIndex].type === graphicTypes.POLYGON
+    ) {
+      const svgRect = document
+        .querySelector(this._svgSelector)
+        .getBoundingClientRect();
+      const cartesianX = e.targetTouches[0].clientX - svgRect.left;
+      const cartesianY = this._height - e.targetTouches[0].clientY + svgRect.top;
+      this._graphics[this._selectedIndex].translatePoint(
+        this._selectedVertex,
+        cartesianX,
+        cartesianY
+      );
+      this.render();
+    }
+  };
+
+  /**
    * Handle drag finish.
    */
   handleMouseUp = () => {
@@ -108,6 +131,15 @@ export default class GraphicsManager {
           .forEach((element, index) => {
             element.addEventListener("mousedown", () =>
               this.handleMouseDown(i, index)
+            );
+            element.addEventListener("touchstart", () =>
+              this.handleMouseDown(i, index)
+            );
+            element.addEventListener("touchmove", (e) =>
+              this.handleTouchMove(e)
+            );
+            element.addEventListener("touchend", () =>
+              this.handleMouseUp()
             );
           });
       } else if (g.type === graphicTypes.GRID) {
