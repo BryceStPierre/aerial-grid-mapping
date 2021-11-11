@@ -13,9 +13,14 @@ import {
 import { retrieve } from "../utils/localStorage";
 import { dimensions } from "../config/constants";
 
-const handleSelectionUpdate = (selectedPortion) => {
-  // TODO: Use selected portion for something.
-  console.log(selectedPortion);
+export const initializeGridUnitSizeControl = (selector, callback) => {
+  let gridUnitSizeControl = document.querySelector(selector);
+  gridUnitSizeControl.value = dimensions.gridUnitSize.default;
+  gridUnitSizeControl.setAttribute("min", dimensions.gridUnitSize.min);
+  gridUnitSizeControl.setAttribute("max", dimensions.gridUnitSize.max);
+  gridUnitSizeControl.addEventListener("input", (e) =>
+    callback(e.target.value)
+  );
 };
 
 /**
@@ -23,7 +28,13 @@ const handleSelectionUpdate = (selectedPortion) => {
  * @param {number} height
  * @param {string} svgSelector
  */
-export const initializeStep3 = (width, height, svgSelector, gridUnitSize = dimensions.gridUnitSize.default) => {
+export const initializeStep3 = (
+  width,
+  height,
+  svgSelector,
+  selectionUpdateCallback,
+  gridUnitSize = dimensions.gridUnitSize.default
+) => {
   let maskRect = new Rectangle(width, height);
   maskRect = createRectangle(maskRect.asGraphic(height));
   maskRect.setAttribute("fill", "#fff");
@@ -75,7 +86,7 @@ export const initializeStep3 = (width, height, svgSelector, gridUnitSize = dimen
     gridUnitSize,
     new Line(averageSlope, pointWithMinimumX)
   );
-  grid.onSelectionUpdate(handleSelectionUpdate);
+  grid.onSelectionUpdate(selectionUpdateCallback);
   grid.setConstraint(constraint);
   manager.addGraphic(grid);
 };

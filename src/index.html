@@ -49,7 +49,10 @@
           <input id="gridUnitSize" type="range" />
         </div>
         <div class="controls" id="topRight">
-          <label id="gridSelection">Side Length: <span>NaN</span>m</label>
+          <label>
+            Selection: <span id="gridSelectionArea">0</span>m<sup>2</sup>
+            (<span id="gridSelectionCount">0</span> units)
+          </label>
         </div>
       </section>
     </main>
@@ -77,10 +80,7 @@
     <!-- Load Google Web Fonts asynchronously. -->
     <script>(WebFontConfig = { google: { families: ["Inter:400,700&display=swap"] }, }), (function () { var e = document.createElement("script"); (e.src = "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"), (e.async = "true"); var t = document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e, t); })();</script>
 
-
-
     <!-- Load Google Maps APIs. -->
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= htmlWebpackPlugin.options.apiKey %>&libraries=places"></script>
-
   </body>
 </html>
