@@ -26,6 +26,10 @@ Run `npm run dev` to run the project using webpack-dev-server.
 
 Run `npm run build` to compile and generate static files in `./dist`.
 
+## Lighthouse Report Scores
+
+![Lighthouse report scores](docs/scores-desktop.png?raw=true)
+
 ## Demo
 
 [Try it out.](https://aerial-grid-mapping.netlify.app/)
