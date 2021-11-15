@@ -78,6 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       initializeGridUnitSizeControl("#gridUnitSize", (newGridUnitSize) => {
         store("gridUnitSize", newGridUnitSize);
+        document.querySelector("#gridSelectionArea").innerHTML = '0';
+        document.querySelector("#gridSelectionCount").innerHTML = '0';
         initializeStep3(
           width,
           height,
